@@ -1,6 +1,12 @@
 footer {
-  background-color: var(--light-color);
+  background-color: #202020;
+  color: #ebebeb;
+  padding: 1rem 0 1.5rem;
+  bottom: 0;
   font-size: var(--body-font-size-xs);
+}
+footer .default-content-wrapper a{
+  color: #ebebeb;
 }
 
 footer .footer > div {

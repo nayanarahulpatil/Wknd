@@ -18,7 +18,9 @@
   --text-color: #131313;
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
-
+  --btn-background-color:#ffea00;
+  --primery-color:#ebebeb;
+  --textColorlight:#202020;
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
@@ -76,7 +78,7 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: var(--body-font-family);
-  font-size: var(--body-font-size-m);
+  font-size: var(--body-font-size-xs);
   line-height: 1.6;
 }
 
@@ -171,29 +173,30 @@ button {
   box-sizing: border-box;
   display: inline-block;
   max-width: 100%;
-  margin: 12px 0;
+  margin: 10px 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border-radius: 0em;
+  padding: 0.9em 1.7em;
   font-family: var(--body-font-family);
   font-style: normal;
   font-weight: 500;
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  background-color: var(--btn-background-color);
+  color: var(--text-color);
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  /* text-transform:uppercase; */
 }
 
 a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--link-hover-color);
+  background-color: var(--btn-background-color);
   cursor: pointer;
 }
 
@@ -229,11 +232,11 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 55px 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: 1135px;
   margin: auto;
   padding: 0 24px;
 }
@@ -254,4 +257,28 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+main .section.separator{
+  display: block;
+  border-style: solid;
+  border-width: 1px;
+  color: #ebebeb;
+  max-width: 1135px;
+  margin: auto;
+}
+ .section > .default-content-wrapper > h2:after {
+  border-bottom: 2px solid var(--brandPrimary, #ffea00);
+  content: "";
+  display: block;
+  padding-top: 8px;
+  width: 84px;
+  margin-bottom: 15px;
+}
+main{
+  margin-top: 0px;
+}
+@media (width >= 900px) {
+  main {
+    margin-top: 100px;
+  }
 }

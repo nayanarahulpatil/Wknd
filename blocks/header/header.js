@@ -117,6 +117,7 @@ export default async function decorate(block) {
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
+
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
   const classes = ['brand', 'sections', 'tools'];
@@ -132,9 +133,25 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
+  const serchbutton = nav.querySelector('.nav-tools')
+  serchbutton.addEventListener('click', () => {
+    window.open("http://google.com", '_blank')
+  });
+  const searchdiv = serchbutton.querySelector('.default-content-wrapper')
+  if(searchdiv){
+    const serchtext = document.createElement('p');
+    serchtext.appendChild(document.createTextNode('Google'))
+    serchtext.classList.add('search-text')
+    searchdiv.append(serchtext)
+  }
+
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+      // console.log(navSection.innerHTML,window.location.origin)
+      navSection.addEventListener('click', () => {
+        window.open(`${window.location.origin}/${(navSection.innerHTML).replace(/ /g,'').toLocaleLowerCase()}`, '_blank') 
+      });
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', () => {
         if (isDesktop.matches) {
@@ -145,6 +162,7 @@ export default async function decorate(block) {
       });
     });
   }
+  
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
@@ -161,6 +179,27 @@ export default async function decorate(block) {
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
-  navWrapper.append(nav);
+
+    const navWrapper1 = document.createElement('div');
+    navWrapper1.className = 'nav-wrapper-black'; 
+    const signintext = document.createElement('a');
+    signintext.href =`${window.location.origin}/modal`
+    signintext.addEventListener('click', async (e) => {
+      const origin = e.target.closest('a');
+      if (origin && origin.href && origin.href.includes('/modal')) {
+        e.preventDefault();
+        const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+        openModal(origin.href);
+      }
+    });
+    signintext.textContent = 'SIGN IN';
+    signintext.title = 'SIGN IN';
+    signintext.classList.add('signin-text')
+    navWrapper1.append(signintext)
+    
+    navWrapper.append(navWrapper1)
+
+  navWrapper.append(nav); 
   block.append(navWrapper);
+
 }
