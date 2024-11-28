@@ -7,7 +7,6 @@ import {
   toClassName,
   getSitePageName,
 } from './util.js';
-import GoogleReCaptcha from './integrations/recaptcha.js';
 import componentDecorator from './mappings.js';
 import DocBasedFormToAF from './transform.js';
 import transferRepeatableDOM from './components/repeat/repeat.js';
@@ -418,8 +417,6 @@ export async function createForm(formDef, data) {
       };
     }
     const pageName = getSitePageName(captchaField?.properties?.['fd:path']);
-    captcha = new GoogleReCaptcha(config, captchaField.id, captchaField.name, pageName);
-    captcha.loadCaptcha(form);
   }
 
   enableValidation(form);
@@ -451,20 +448,6 @@ function cleanUp(content) {
   const formDef = content.replaceAll('^(([^<>()\\\\[\\\\]\\\\\\\\.,;:\\\\s@\\"]+(\\\\.[^<>()\\\\[\\\\]\\\\\\\\.,;:\\\\s@\\"]+)*)|(\\".+\\"))@((\\\\[[0-9]{1,3}\\\\.[0-9]{1,3}\\\\.[0-9]{1,3}\\\\.[0-9]{1,3}])|(([a-zA-Z\\\\-0-9]+\\\\.)\\+[a-zA-Z]{2,}))$', '');
   return formDef?.replace(/\x83\n|\n|\s\s+/g, '');
 }
-/*
-  Newer Clean up - Replace backslashes that are not followed by valid json escape characters
-  function cleanUp(content) {
-    return content.replace(/\\/g, (match, offset, string) => {
-      const prevChar = string[offset - 1];
-      const nextChar = string[offset + 1];
-      const validEscapeChars = ['b', 'f', 'n', 'r', 't', '"', '\\'];
-      if (validEscapeChars.includes(nextChar) || prevChar === '\\') {
-        return match;
-      }
-      return '';
-    });
-  }
-*/
 
 function decode(rawContent) {
   const content = rawContent.trim();
