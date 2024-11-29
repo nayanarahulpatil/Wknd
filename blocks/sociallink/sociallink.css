@@ -8,7 +8,7 @@
 
 .sociallink > ul > li {
   border: none;
-  background-color: var(--textColorlight);
+  background-color: #202020;
   padding: 2px 20px;
 }
 .sociallink .sociallink-card a {

@@ -3,19 +3,16 @@ body.modal-open {
 }
 
 .modal dialog::backdrop {
-  background-color: rgba(65, 64, 64, 0.75);
+  background-color: rgba(65, 64, 64, 75%);
 }
 
 .modal dialog {
   overscroll-behavior: none;
   overflow-y: hidden;
   width: calc(100vw - 48px);
-  max-width: 450px;
   padding: 15px;
   border: 1px solid var(--dark-color);
-  /* box-shadow: 0 10px 20px dimgray; */
   box-shadow: 0 10px 20px rgb(31, 30, 30);
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 450px;
 }
