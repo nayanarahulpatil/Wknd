@@ -87,7 +87,9 @@ function constructPayload(form) {
 
 async function prepareRequest(form) {
   const { payload } = constructPayload(form);
-  const { branch, site, org, tier } = getRouting();
+  const {
+    branch, site, org, tier
+  } = getRouting();
   const headers = {
     'Content-Type': 'application/json',
     'x-adobe-routing': `tier=${tier},bucket=${branch}--${site}--${org}`,

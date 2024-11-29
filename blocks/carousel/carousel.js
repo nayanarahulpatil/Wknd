@@ -1,4 +1,4 @@
-// import { fetchPlaceholders } from '../../scripts/aem.js';
+import { fetchPlaceholders } from '../../scripts/aem.js';
 
 // const placeholders = await fetchPlaceholders();
 // const { clickhere } = placeholders;
@@ -143,11 +143,10 @@ export default async function decorate(block) {
     slideNavButtons.classList.add('carousel-navigation-buttons');
     slideNavButtons.innerHTML = `
       <button type="button" class= "slide-prev" aria-label="${
-    placeholders.previousSlide || 'Previous Slide'
-}"></button>
-      <button type="button" class="slide-next" aria-label="${
-    placeholders.nextSlide || 'Next Slide'
-}"></button>
+      placeholders.previousSlide || 'Previous Slide'
+      }"></button>
+      <button type="button" class="slide-next" aria-label="${placeholders.nextSlide || 'Next Slide'
+      }"></button>
     `;
 
     container.append(slideNavButtons);

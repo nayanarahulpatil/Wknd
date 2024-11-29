@@ -35,7 +35,9 @@ export async function createModal(contentNodes) {
 
   // close on click outside the dialog
   dialog.addEventListener('click', (e) => {
-    const { left, right, top, bottom } = dialog.getBoundingClientRect();
+    const {
+      left, right, top, bottom
+    } = dialog.getBoundingClientRect();
     const { clientX, clientY } = e;
     if (
       clientX < left

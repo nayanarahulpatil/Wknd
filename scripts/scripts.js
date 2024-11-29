@@ -39,7 +39,7 @@ function buildHeroBlock(main) {
 async function loadFonts() {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
   try {
-    if (!window.location.hostname.includes('localhost')){
+    if (!window.location.hostname.includes('localhost')) {
       sessionStorage.setItem('fonts-loaded', 'true');
     }
   } catch (e) {
