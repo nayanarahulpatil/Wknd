@@ -37,22 +37,20 @@ export function toClassName(name) {
     : '';
 }
 
-/* eslint-disable */
-export const getId = (
-  function getId() {
-    let ids = {};
-    return (name) => {
-      if (name === Symbol('clear')) {
-        ids = {};
-        return '';
-      }
-      const slug = toClassName(name);
-      ids[slug] = ids[slug] || 0;
-      const idSuffix = ids[slug] ? `-${ids[slug]}` : '';
-      ids[slug] += 1;
-      return `${slug}${idSuffix}`;
-    };
-  })();
+export const getId = (() => {
+  let ids = {};
+  return (name) => {
+    if (name === Symbol('clear')) {
+      ids = {};
+      return '';
+    }
+    const slug = toClassName(name);
+    ids[slug] = ids[slug] || 0;
+    const idSuffix = ids[slug] ? `-${ids[slug]}` : '';
+    ids[slug] += 1;
+    return `${slug}${idSuffix}`;
+  };
+})();
 
 /**
  * Resets the ids for the getId function
