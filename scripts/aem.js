@@ -14,8 +14,8 @@
 function sampleRUM(checkpoint, data) {
   // eslint-disable-next-line max-len
   const timeShift = () => window.performance
-      ? window.performance.now()
-      : Date.now() - window.hlx.rum.firstReadTime;
+    ? window.performance.now()
+    : Date.now() - window.hlx.rum.firstReadTime;
   try {
     window.hlx = window.hlx || {};
     sampleRUM.enhance = () => {};
@@ -73,7 +73,7 @@ function sampleRUM(checkpoint, data) {
           sampleRUM('error', errData);
         });
 
-        sampleRUM.baseURL = sampleRUM.baseURL 
+        sampleRUM.baseURL = sampleRUM.baseURL
         || new URL(window.RUM_BASE || '/', new URL('https://rum.hlx.page'));
         sampleRUM.collectBaseURL = sampleRUM.collectBaseURL || sampleRUM.baseURL;
         sampleRUM.sendPing = (ck, time, pingData = {}) => {
@@ -94,8 +94,8 @@ function sampleRUM(checkpoint, data) {
             sampleRUM.collectBaseURL,
           );
           const body = origin === window.location.origin
-              ? new Blob([rumData], { type: 'application/json' })
-              : rumData;
+            ? new Blob([rumData], { type: 'application/json' })
+            : rumData;
           navigator.sendBeacon(url, body);
           // eslint-disable-next-line no-console
           console.debug(`ping:${ck}`, pingData);
@@ -105,8 +105,7 @@ function sampleRUM(checkpoint, data) {
         sampleRUM.enhance = () => {
           // only enhance once
           if (document.querySelector('script[src*="rum-enhancer"]')) return;
-          const { enhancerVersion, enhancerHash } =
-            sampleRUM.enhancerContext || {};
+          const { enhancerVersion, enhancerHash } = sampleRUM.enhancerContext || {};
           const script = document.createElement('script');
           if (enhancerHash) {
             script.integrity = enhancerHash;
@@ -176,10 +175,10 @@ function init() {
 function toClassName(name) {
   return typeof name === 'string'
     ? name
-        .toLowerCase()
-        .replace(/[^0-9a-z]/gi, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '')
+      .toLowerCase()
+      .replace(/[^0-9a-z]/gi, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
     : '';
 }
 /**
@@ -391,7 +390,7 @@ function wrapTextNodes(block) {
   block.querySelectorAll(':scope > div > div').forEach((blockColumn) => {
     if (blockColumn.hasChildNodes()) {
       const hasWrapper = !!blockColumn.firstElementChild
-      && validWrappers.some(
+        && validWrappers.some(
           (tagName) => blockColumn.firstElementChild.tagName === tagName,
         );
       if (!hasWrapper) {

@@ -16,7 +16,7 @@ export function stripTags(input, allowd = allowedTags) {
   const nbsp = /&nbsp;/g; // nbsp: non-breaking space character
   return input
     .replace(comments, '')
-    .replace(tags, ($0, $1) => allowed.indexOf(`<${$1.toLowerCase()}>`) > -1 ? $0 : '',)
+    .replace(tags, ($0, $1) => allowed.indexOf(`<${$1.toLowerCase()}>`) > -1 ? $0 : '')
     .replace(nbsp, '')
     .trim();
 }
@@ -29,10 +29,10 @@ export function stripTags(input, allowd = allowedTags) {
 export function toClassName(name) {
   return typeof name === 'string'
     ? name
-    .toLowerCase()
-    .replace(/[^0-9a-z]/gi, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
+      .toLowerCase()
+      .replace(/[^0-9a-z]/gi, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
     : '';
 }
 
@@ -224,11 +224,11 @@ function getValidationMessage(fieldElement, wrapper) {
   const { key, attribute } = validityKeyMsgMap[invalidProperty] || {};
   const message = wrapper.dataset[`${key}ErrorMessage`]
     || (attribute
-    ? defaultErrorMessages[key].replace(
-    /\$0/,
-    fieldElement.getAttribute(attribute),
-    )
-    : defaultErrorMessages[key]);
+      ? defaultErrorMessages[key].replace(
+        /\$0/,
+        fieldElement.getAttribute(attribute),
+      )
+      : defaultErrorMessages[key]);
   return message || fieldElement.validationMessage;
 }
 
