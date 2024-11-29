@@ -20,8 +20,6 @@
     --link-hover-color: #1d3ecf;
     --btn-background-color: #ffea00;
     --primery-color: #ebebeb;
-    --textColorlight: #202020;
-
     --background-color-primary: #fff;
     --label-color: #666;
     --border-color: #818a91;
@@ -80,6 +78,7 @@
     --form-wizard-step-legend-padding: 10px;
     --form-wizard-step-legend-font-size: 1.1rem;
     --header-height: 10px;
+
     /* fonts */
     --body-font-family: roboto, roboto-fallback, sans-serif;
     --heading-font-family: roboto-condensed, roboto-condensed-fallback,

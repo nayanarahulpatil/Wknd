@@ -19,7 +19,7 @@
 .avatarcard .avatarcard-card-body p {
   color: dimgray;
   display: block;
-  font-size: var(--fontSizeSmall, 14px);
+  font-size: 14px;
   margin-top: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -34,7 +34,7 @@
 .avatarcard > ul > li img {
   border-radius: 50%;
   height: 164px;
-  -o-object-fit: cover;
+  object-fit: cover;
   object-fit: cover;
   width: 164px;
 }

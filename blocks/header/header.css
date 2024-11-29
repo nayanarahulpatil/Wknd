@@ -25,7 +25,7 @@ header .nav-wrapper-black {
 }
 header .nav-wrapper-black a {
   color: #ebebeb;
-  font-size: var(--fontSizeSmall, 14px);
+  font-size: 14px;
   text-transform: uppercase;
   text-decoration: none;
 }
