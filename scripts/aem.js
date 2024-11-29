@@ -13,7 +13,7 @@
 /* eslint-env browser */
 function sampleRUM(checkpoint, data) {
   // eslint-disable-next-line max-len
-  const timeShift = () => window.performance
+  const timeShift = () => { window.performance
     ? window.performance.now()
     : Date.now() - window.hlx.rum.firstReadTime;
   try {
@@ -133,6 +133,7 @@ function sampleRUM(checkpoint, data) {
   } catch (error) {
     // something went awry
   }
+}
 }
 
 /**

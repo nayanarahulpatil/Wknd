@@ -87,7 +87,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   );
   button.setAttribute(
     'aria-label',
-    expanded ? 'Open navigation' : 'Close navigation'
+    expanded ? 'Open navigation' : 'Close navigation',
   );
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
@@ -170,7 +170,8 @@ export default async function decorate(block) {
             `${window.location.origin}/${navSection.innerHTML
               .replace(/ /g, '')
               .toLocaleLowerCase()}`,
-            '_blank');
+            '_blank',
+          );
         });
         if (navSection.querySelector('ul')) {
           navSection.classList.add('nav-drop');
