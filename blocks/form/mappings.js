@@ -36,8 +36,7 @@ async function loadComponent(componentName, element, fd, container) {
     const { blockName } = element.dataset;
     try {
       loadCSS(
-        `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`
-      );
+        `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`);
       const decorationComplete = new Promise((resolve) => {
         (async () => {
           try {
@@ -79,8 +78,7 @@ export default async function componentDecorator(element, fd, container) {
   }
 
   if (
-    getCustomComponents().includes(type) ||
-    getOOTBComponents().includes(type)
+    getCustomComponents().includes(type) || getOOTBComponents().includes(type)
   ) {
     await loadComponent(type, element, fd, container);
   }

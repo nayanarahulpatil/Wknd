@@ -7,8 +7,7 @@ import {
 export function submitSuccess(e, form) {
   const { payload } = e;
   const redirectUrl = form.dataset.redirectUrl || payload?.body?.redirectUrl;
-  const thankYouMsg =
-    form.dataset.thankYouMsg || payload?.body?.thankYouMessage;
+  const thankYouMsg = form.dataset.thankYouMsg || payload?.body?.thankYouMessage;
   if (redirectUrl) {
     window.location.assign(encodeURI(redirectUrl));
   } else {
@@ -68,10 +67,10 @@ function constructPayload(form) {
   const payload = { __id__: generateUnique() };
   [...form.elements].forEach((fe) => {
     if (
-      fe.name &&
-      !fe.matches('button') &&
-      !fe.disabled &&
-      fe.tagName !== 'FIELDSET'
+      fe.name
+      && !fe.matches('button')
+      && !fe.disabled
+      && fe.tagName !== 'FIELDSET'
     ) {
       const value = getFieldValue(fe, payload);
       if (fe.closest('.repeat-wrapper')) {
@@ -97,8 +96,7 @@ async function prepareRequest(form) {
   let url;
   let baseUrl = getSubmitBaseUrl();
   if (!baseUrl && org && site) {
-    baseUrl =
-      'https://main--Wknd--nayanarahulpatil.hlx.page/enquirey-form.json';
+    baseUrl = 'https://main--Wknd--nayanarahulpatil.hlx.page/enquirey-form.json';
     headers[
       'x-adobe-routing'
     ] = `tier=${tier},bucket=${branch}--${site}--${org}`;
@@ -117,7 +115,6 @@ async function submitDocBasedForm(form, captcha) {
       token = await captcha.getToken();
       body.data['g-recaptcha-response'] = token;
     }
-    console.log('body', body);
     const response = await fetch(url, {
       method: 'POST',
       headers,

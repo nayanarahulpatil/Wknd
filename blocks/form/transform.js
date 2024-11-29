@@ -111,15 +111,15 @@ function handleFranklinSpecialCases(item) {
   item.required = item.required === 'x' || item.required === true;
 
   if (
-    item.Max ||
-    item.Min ||
-    item?.constraintMessages?.max ||
-    item?.constraintMessages?.min
+    item.Max
+    || item.Min
+    || item?.constraintMessages?.max
+    || item?.constraintMessages?.min
   ) {
     if (
-      item.fieldType === 'number-input' ||
-      item.fieldType === 'date' ||
-      item.fieldType === 'range'
+      item.fieldType === 'number-input'
+      || item.fieldType === 'date'
+      || item.fieldType === 'range'
     ) {
       item.maximum = item.Max;
       item.minimum = item.Min;
@@ -252,8 +252,7 @@ export default class DocBasedFormToAF {
         if (item.Type) {
           // eslint-disable-next-line no-unused-vars
           const source = Object.fromEntries(
-            Object.entries(item).filter(([_, v]) => v != null && v !== '')
-          );
+            Object.entries(item).filter(([v]) => v != null && v !== ''));
           let field = { ...source, ...initField() };
           field.id = field.Id || getId(field.Name);
           field.value = field.Value || '';

@@ -1,5 +1,6 @@
 import { DEFAULT_THANK_YOU_MESSAGE } from './constant.js';
-import { createHelpText, checkValidation } from './util.js';
+import { checkValidation } from './util.js';
+
 function createSelect(fd) {
   const select = document.createElement('select');
   select.id = fd.Field;
@@ -74,9 +75,8 @@ export function submitFailure(e, form) {
 async function submitForm(form) {
   try {
     const payload = constructPayload(form);
-    console.log(JSON.stringify(payload));
     payload.timestamp = new Date().toJSON();
-    const resp = await fetch(
+    const response = await fetch(
       `https://form.aem.page/main--helix-website--adobe${form.dataset.action}`,
       {
         method: 'POST',
@@ -109,7 +109,6 @@ function createButton(fd) {
       const form = button.closest('form');
       if (fd.Placeholder) form.dataset.action = fd.Placeholder;
       if (form.checkValidity()) {
-        console.log('hi', form.checkValidity());
         event.preventDefault();
         button.setAttribute('disabled', '');
         form
@@ -191,9 +190,20 @@ function fill(form) {
   if (action === '/tools/bot/register-form') {
     const loc = new URL(window.location.href);
     form.querySelector('#owner').value = loc.searchParams.get('owner') || '';
-    form.querySelector('#installationId').value =
-      loc.searchParams.get('id') || '';
+    form.querySelector('#installationId').value = loc.searchParams.get('id') || '';
   }
+}
+
+function enableValidation(form) {
+  form.querySelectorAll('input,textarea,select').forEach((input) => {
+    input.addEventListener('invalid', (event) => {
+      checkValidation(event.target);
+    });
+  });
+
+  form.addEventListener('change', (event) => {
+    checkValidation(event.target);
+  });
 }
 
 export async function createForm(formURL) {
@@ -252,17 +262,6 @@ export async function createForm(formURL) {
   applyRules(form, rules);
   fill(form);
   return form;
-}
-function enableValidation(form) {
-  form.querySelectorAll('input,textarea,select').forEach((input) => {
-    input.addEventListener('invalid', (event) => {
-      checkValidation(event.target);
-    });
-  });
-
-  form.addEventListener('change', (event) => {
-    checkValidation(event.target);
-  });
 }
 
 export default async function decorate(block) {
