@@ -16,7 +16,6 @@ main .form-container {
   background-color: var(--form-background-color);
   padding: var(--form-padding);
   width: var(--form-submit-width);
-  /* margin: var(--nav-height) auto; */
 }
 
 main .form {
@@ -120,10 +119,7 @@ main .form form .field-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* display: grid;
-    margin: var(--form-field-gap); */
   color: var(--form-label-color);
-  /* grid-column: span 12; */
 }
 
 main .form form p {

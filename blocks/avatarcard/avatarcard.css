@@ -1,6 +1,7 @@
 .section .avatarcard-wrapper {
   margin-top: 30px;
 }
+
 .avatarcard > ul {
   list-style: none;
   margin: 0;
@@ -31,12 +32,14 @@
 .avatarcard .avatarcard-card-image {
   line-height: 0;
 }
+
 .avatarcard > ul > li img {
   border-radius: 50%;
   height: 164px;
   object-fit: cover;
   width: 164px;
 }
+
 .avatarcard-card-body > h3,
 .avatarcard-card-body > h5 {
   color: #202020;
@@ -44,6 +47,7 @@
   font-size: 24px;
   font-weight: 500;
 }
+
 .avatarcard-card-body > h5 {
   font-size: 14px;
   text-transform: uppercase;

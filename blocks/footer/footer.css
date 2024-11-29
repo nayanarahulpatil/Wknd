@@ -5,6 +5,7 @@ footer {
   bottom: 0;
   font-size: var(--body-font-size-xs);
 }
+
 footer .default-content-wrapper a {
   color: #ebebeb;
 }

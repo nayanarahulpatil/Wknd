@@ -158,6 +158,7 @@
 .carousel .carousel-slide-indicator button:focus-visible {
     background-color: var(--text-color);
 }
+
 @media (width >=600px) {
     .carousel .carousel-navigation-buttons {
         left: 24px;
