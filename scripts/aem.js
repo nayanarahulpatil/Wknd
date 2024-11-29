@@ -13,9 +13,11 @@
 /* eslint-env browser */
 function sampleRUM(checkpoint, data) {
   // eslint-disable-next-line max-len
-  const timeShift = () => { window.performance
+  const timeShift = () => {
+    window.performance
     ? window.performance.now()
     : Date.now() - window.hlx.rum.firstReadTime;
+  }
   try {
     window.hlx = window.hlx || {};
     sampleRUM.enhance = () => {};
@@ -112,8 +114,7 @@ function sampleRUM(checkpoint, data) {
             script.setAttribute('crossorigin', 'anonymous');
           }
           script.src = new URL(
-            `.rum/@adobe/helix-rum-enhancer@${
-              enhancerVersion || '^2'
+            `.rum/@adobe/helix-rum-enhancer@${enhancerVersion || '^2'
             }/src/index.js`,
             sampleRUM.baseURL,
           ).href;
@@ -131,9 +132,8 @@ function sampleRUM(checkpoint, data) {
       new CustomEvent('rum', { detail: { checkpoint, data } }),
     );
   } catch (error) {
-    // something went awry
+    console.error(error);
   }
-}
 }
 
 /**

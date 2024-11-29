@@ -3,7 +3,7 @@ import { defaultErrorMessages } from './constant.js';
 
 const headings = Array.from({ length: 5 }, (_, i) => `<h${i + 1}>`).join('');
 const allowedTags = `${headings}<a><b><p><i><em><strong><ul><li><ol>`;
-const clear = Symbol('clear');
+const clear = Symbol('clear'); 
 
 export function stripTags(input, allowd = allowedTags) {
   if (typeof input !== 'string') {
@@ -17,9 +17,7 @@ export function stripTags(input, allowd = allowedTags) {
   const nbsp = /&nbsp;/g; // nbsp: non-breaking space character
   return input
     .replace(comments, '')
-    .replace(tags, ($0, $1) => {
-      allowed.indexOf(`<${$1.toLowerCase()}>`) > -1 ? $0 : ''
-    })
+    .replace(tags, ($0, $1) => allowed.indexOf(`<${$1.toLowerCase()}>`) > -1 ? $0 : '')
     .replace(nbsp, '')
     .trim();
 }
