@@ -9,7 +9,8 @@ function closeOnEscape(e) {
     const nav = document.getElementById('nav');
     const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector(
-      '[aria-expanded="true"]');
+      '[aria-expanded="true"]',
+    );
     if (navSectionExpanded && isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections);
@@ -27,7 +28,8 @@ function closeOnFocusLost(e) {
   if (!nav.contains(e.relatedTarget)) {
     const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector(
-      '[aria-expanded="true"]');
+      '[aria-expanded="true"]',
+    );
     if (navSectionExpanded && isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections, false);
@@ -81,7 +83,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(
     navSections,
-    expanded || isDesktop.matches ? 'false' : 'true');
+    expanded || isDesktop.matches ? 'false' : 'true',
+  );
   button.setAttribute(
     'aria-label',
     expanded ? 'Open navigation' : 'Close navigation');
@@ -168,7 +171,7 @@ export default async function decorate(block) {
               .toLocaleLowerCase()}`,
             '_blank');
         });
-        if (navSection.querySelector('ul'))
+        if (navSection.querySelector('ul')) {
           navSection.classList.add('nav-drop');
         navSection.addEventListener('click', () => {
           if (isDesktop.matches) {
@@ -177,6 +180,7 @@ export default async function decorate(block) {
             navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
           }
         });
+      }
       });
   }
 
@@ -191,8 +195,7 @@ export default async function decorate(block) {
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
-  isDesktop.addEventListener('change', () =>
-    toggleMenu(nav, navSections, isDesktop.matches));
+  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
@@ -206,7 +209,8 @@ export default async function decorate(block) {
     if (origin && origin.href && origin.href.includes('/modal')) {
       e.preventDefault();
       const { openModal } = await import(
-        `${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+        `${window.hlx.codeBasePath}/blocks/modal/modal.js`,
+      );
       openModal(origin.href);
     }
   });
