@@ -246,7 +246,7 @@ button {
     max-width: 100%;
     margin: 10px 0;
     border: 2px solid transparent;
-    border-radius: 0em;
+    border-radius: 0;
     padding: 0.9em 1.7em;
     font-family: var(--body-font-family);
     font-style: normal;
@@ -260,7 +260,6 @@ button {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    /* text-transform:uppercase; */
 }
 
 a.button:hover,
@@ -338,7 +337,7 @@ main .section.separator {
     margin: auto;
 }
 .section > .default-content-wrapper > h2:after {
-    border-bottom: 2px solid var(--brandPrimary, #ffea00);
+    border-bottom: 2px solid #ffea00;
     content: "";
     display: block;
     padding-top: 8px;
@@ -346,7 +345,7 @@ main .section.separator {
     margin-bottom: 15px;
 }
 main {
-    margin-top: 0px;
+    margin-top: 0;
 }
 @media (width >= 900px) {
     main {

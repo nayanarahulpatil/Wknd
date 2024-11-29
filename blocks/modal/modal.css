@@ -3,7 +3,7 @@ body.modal-open {
 }
 
 .modal dialog::backdrop {
-  background-color: rgba(65, 64, 64, 75%);
+  background-color: rgba(65 64 64 / 75%);
 }
 
 .modal dialog {
@@ -12,7 +12,7 @@ body.modal-open {
   width: calc(100vw - 48px);
   padding: 15px;
   border: 1px solid var(--dark-color);
-  box-shadow: 0 10px 20px rgb(31, 30, 30);
+  box-shadow: rgba(31 30 30 0 10 2px);
   box-sizing: border-box;
   max-width: 450px;
 }

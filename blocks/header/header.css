@@ -323,7 +323,7 @@ header nav .nav-sections ul > li > ul > li {
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    color: var(--textColor, #202020);
+    color: #202020;
     font-size: var(--body-font-size-xs, 14px);
     padding: 15px 17px;
     text-decoration: none;
@@ -338,7 +338,7 @@ header nav .nav-tools {
   width: 125px;
   max-width: 125px;
   background-color: var(--primery-color);
-  box-shadow: rgba(0 0 0 1px 0px 4px);
+  box-shadow: rgba(0 0 0 1px 0 4px);
   display: none;
   visibility: hidden;
 }
