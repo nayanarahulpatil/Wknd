@@ -1,10 +1,10 @@
-import { loadFragment } from "../fragment/fragment.js";
+import { loadFragment } from '../fragment/fragment.js';
 import {
   buildBlock,
   decorateBlock,
   loadBlock,
   loadCSS,
-} from "../../scripts/aem.js";
+} from '../../scripts/aem.js';
 
 /*
   This is not a traditional block, so there is no decorate function.
@@ -14,27 +14,27 @@ import {
 
 export async function createModal(contentNodes) {
   await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
-  const dialog = document.createElement("dialog");
-  const dialogContent = document.createElement("div");
-  dialogContent.classList.add("modal-content");
+  const dialog = document.createElement('dialog');
+  const dialogContent = document.createElement('div');
+  dialogContent.classList.add('modal-content');
   dialogContent.append(...contentNodes);
   dialog.append(dialogContent);
 
-  const closeButton = document.createElement("button");
-  closeButton.classList.add("close-button");
-  closeButton.setAttribute("aria-label", "Close");
-  closeButton.type = "button";
+  const closeButton = document.createElement('button');
+  closeButton.classList.add('close-button');
+  closeButton.setAttribute('aria-label', 'Close');
+  closeButton.type = 'button';
   closeButton.innerHTML = '<span class="icon icon-close"></span>';
-  closeButton.addEventListener("click", () => dialog.close());
+  closeButton.addEventListener('click', () => dialog.close());
   dialog.prepend(closeButton);
 
-  const block = buildBlock("modal", "");
-  document.querySelector("main").append(block);
+  const block = buildBlock('modal', '');
+  document.querySelector('main').append(block);
   decorateBlock(block);
   await loadBlock(block);
 
   // close on click outside the dialog
-  dialog.addEventListener("click", (e) => {
+  dialog.addEventListener('click', (e) => {
     const { left, right, top, bottom } = dialog.getBoundingClientRect();
     const { clientX, clientY } = e;
     if (
@@ -47,12 +47,12 @@ export async function createModal(contentNodes) {
     }
   });
 
-  dialog.addEventListener("close", () => {
-    document.body.classList.remove("modal-open");
+  dialog.addEventListener('close', () => {
+    document.body.classList.remove('modal-open');
     block.remove();
   });
 
-  block.innerHTML = "";
+  block.innerHTML = '';
   block.append(dialog);
 
   return {
@@ -63,13 +63,13 @@ export async function createModal(contentNodes) {
       setTimeout(() => {
         dialogContent.scrollTop = 0;
       }, 0);
-      document.body.classList.add("modal-open");
+      document.body.classList.add('modal-open');
     },
   };
 }
 
 export async function openModal(fragmentUrl) {
-  const path = fragmentUrl.startsWith("http")
+  const path = fragmentUrl.startsWith('http')
     ? new URL(fragmentUrl, window.location).pathname
     : fragmentUrl;
 

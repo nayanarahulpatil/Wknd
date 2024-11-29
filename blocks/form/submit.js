@@ -2,7 +2,7 @@ import {
   DEFAULT_THANK_YOU_MESSAGE,
   getRouting,
   getSubmitBaseUrl,
-} from "./constant.js";
+} from './constant.js';
 
 export function submitSuccess(e, form) {
   const { payload } = e;
@@ -13,33 +13,33 @@ export function submitSuccess(e, form) {
     window.location.assign(encodeURI(redirectUrl));
   } else {
     let thankYouMessage = form.parentNode.querySelector(
-      ".form-message.success-message"
+      '.form-message.success-message'
     );
     if (!thankYouMessage) {
-      thankYouMessage = document.createElement("div");
-      thankYouMessage.className = "form-message success-message";
+      thankYouMessage = document.createElement('div');
+      thankYouMessage.className = 'form-message success-message';
     }
     thankYouMessage.innerHTML = thankYouMsg || DEFAULT_THANK_YOU_MESSAGE;
     form.parentNode.insertBefore(thankYouMessage, form);
     if (thankYouMessage.scrollIntoView) {
-      thankYouMessage.scrollIntoView({ behavior: "smooth" });
+      thankYouMessage.scrollIntoView({ behavior: 'smooth' });
     }
     form.reset();
   }
-  form.setAttribute("data-submitting", "false");
+  form.setAttribute('data-submitting', 'false');
   form.querySelector('button[type="submit"]').disabled = false;
 }
 
 export function submitFailure(e, form) {
-  let errorMessage = form.querySelector(".form-message.error-message");
+  let errorMessage = form.querySelector('.form-message.error-message');
   if (!errorMessage) {
-    errorMessage = document.createElement("div");
-    errorMessage.className = "form-message error-message";
+    errorMessage = document.createElement('div');
+    errorMessage.className = 'form-message error-message';
   }
-  errorMessage.innerHTML = "Some error occured while submitting the form"; // TODO: translation
+  errorMessage.innerHTML = 'Some error occured while submitting the form'; // TODO: translation
   form.prepend(errorMessage);
-  errorMessage.scrollIntoView({ behavior: "smooth" });
-  form.setAttribute("data-submitting", "false");
+  errorMessage.scrollIntoView({ behavior: 'smooth' });
+  form.setAttribute('data-submitting', 'false');
   form.querySelector('button[type="submit"]').disabled = false;
 }
 
@@ -48,17 +48,17 @@ function generateUnique() {
 }
 
 function getFieldValue(fe, payload) {
-  if (fe.type === "radio") {
+  if (fe.type === 'radio') {
     return fe.form.elements[fe.name].value;
   }
-  if (fe.type === "checkbox") {
+  if (fe.type === 'checkbox') {
     if (fe.checked) {
       if (payload[fe.name]) {
         return `${payload[fe.name]},${fe.value}`;
       }
       return fe.value;
     }
-  } else if (fe.type !== "file") {
+  } else if (fe.type !== 'file') {
     return fe.value;
   }
   return null;
@@ -69,12 +69,12 @@ function constructPayload(form) {
   [...form.elements].forEach((fe) => {
     if (
       fe.name &&
-      !fe.matches("button") &&
+      !fe.matches('button') &&
       !fe.disabled &&
-      fe.tagName !== "FIELDSET"
+      fe.tagName !== 'FIELDSET'
     ) {
       const value = getFieldValue(fe, payload);
-      if (fe.closest(".repeat-wrapper")) {
+      if (fe.closest('.repeat-wrapper')) {
         payload[fe.name] = payload[fe.name]
           ? `${payload[fe.name]},${fe.value}`
           : value;
@@ -90,17 +90,17 @@ async function prepareRequest(form) {
   const { payload } = constructPayload(form);
   const { branch, site, org, tier } = getRouting();
   const headers = {
-    "Content-Type": "application/json",
-    "x-adobe-routing": `tier=${tier},bucket=${branch}--${site}--${org}`,
+    'Content-Type': 'application/json',
+    'x-adobe-routing': `tier=${tier},bucket=${branch}--${site}--${org}`,
   };
   const body = { data: payload };
   let url;
   let baseUrl = getSubmitBaseUrl();
   if (!baseUrl && org && site) {
     baseUrl =
-      "https://main--Wknd--nayanarahulpatil.hlx.page/enquirey-form.json";
+      'https://main--Wknd--nayanarahulpatil.hlx.page/enquirey-form.json';
     headers[
-      "x-adobe-routing"
+      'x-adobe-routing'
     ] = `tier=${tier},bucket=${branch}--${site}--${org}`;
     url = baseUrl + btoa(form.dataset.action);
   } else {
@@ -115,11 +115,11 @@ async function submitDocBasedForm(form, captcha) {
     let token = null;
     if (captcha) {
       token = await captcha.getToken();
-      body.data["g-recaptcha-response"] = token;
+      body.data['g-recaptcha-response'] = token;
     }
-    console.log("body", body);
+    console.log('body', body);
     const response = await fetch(url, {
-      method: "POST",
+      method: 'POST',
       headers,
       body: JSON.stringify(body),
     });
@@ -138,24 +138,24 @@ export async function handleSubmit(e, form, captcha) {
   e.preventDefault();
   const valid = form.checkValidity();
   if (valid) {
-    e.submitter?.setAttribute("disabled", "");
-    if (form.getAttribute("data-submitting") !== "true") {
-      form.setAttribute("data-submitting", "true");
+    e.submitter?.setAttribute('disabled', '');
+    if (form.getAttribute('data-submitting') !== 'true') {
+      form.setAttribute('data-submitting', 'true');
 
       // hide error message in case it was shown before
       form
-        .querySelectorAll(".form-message.show")
-        .forEach((el) => el.classList.remove("show"));
+        .querySelectorAll('.form-message.show')
+        .forEach((el) => el.classList.remove('show'));
 
-      if (form.dataset.source === "sheet") {
+      if (form.dataset.source === 'sheet') {
         await submitDocBasedForm(form, captcha);
       }
     }
   } else {
-    const firstInvalidEl = form.querySelector(":invalid:not(fieldset)");
+    const firstInvalidEl = form.querySelector(':invalid:not(fieldset)');
     if (firstInvalidEl) {
       firstInvalidEl.focus();
-      firstInvalidEl.scrollIntoView({ behavior: "smooth" });
+      firstInvalidEl.scrollIntoView({ behavior: 'smooth' });
     }
   }
 }

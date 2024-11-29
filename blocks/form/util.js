@@ -1,25 +1,25 @@
 // create a string containing head tags from h1 to h5
-import { defaultErrorMessages } from "./constant.js";
+import { defaultErrorMessages } from './constant.js';
 
-const headings = Array.from({ length: 5 }, (_, i) => `<h${i + 1}>`).join("");
+const headings = Array.from({ length: 5 }, (_, i) => `<h${i + 1}>`).join('');
 const allowedTags = `${headings}<a><b><p><i><em><strong><ul><li><ol>`;
 
 export function stripTags(input, allowd = allowedTags) {
-  if (typeof input !== "string") {
+  if (typeof input !== 'string') {
     return input;
   }
   const allowed = (
-    `${allowd || ""}`.toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []
-  ).join(""); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+    `${allowd || ''}`.toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []
+  ).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
   const tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
   const comments = /<!--[\s\S]*?-->/gi;
   const nbsp = /&nbsp;/g; // nbsp: non-breaking space character
   return input
-    .replace(comments, "")
+    .replace(comments, '')
     .replace(tags, ($0, $1) =>
-      allowed.indexOf(`<${$1.toLowerCase()}>`) > -1 ? $0 : ""
+      allowed.indexOf(`<${$1.toLowerCase()}>`) > -1 ? $0 : ''
     )
-    .replace(nbsp, "")
+    .replace(nbsp, '')
     .trim();
 }
 
@@ -29,27 +29,27 @@ export function stripTags(input, allowd = allowedTags) {
  * @returns {string} The class name
  */
 export function toClassName(name) {
-  return typeof name === "string"
+  return typeof name === 'string'
     ? name
         .toLowerCase()
-        .replace(/[^0-9a-z]/gi, "-")
-        .replace(/-+/g, "-")
-        .replace(/^-|-$/g, "")
-    : "";
+        .replace(/[^0-9a-z]/gi, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '')
+    : '';
 }
 
-const clear = Symbol("clear");
+const clear = Symbol('clear');
 
 export const getId = (function getId() {
   let ids = {};
   return (name) => {
     if (name === clear) {
       ids = {};
-      return "";
+      return '';
     }
     const slug = toClassName(name);
     ids[slug] = ids[slug] || 0;
-    const idSuffix = ids[slug] ? `-${ids[slug]}` : "";
+    const idSuffix = ids[slug] ? `-${ids[slug]}` : '';
     ids[slug] += 1;
     return `${slug}${idSuffix}`;
   };
@@ -63,21 +63,21 @@ export function resetIds() {
   getId(clear);
 }
 
-export function createLabel(fd, tagName = "label") {
+export function createLabel(fd, tagName = 'label') {
   if (fd.label && fd.label.value) {
     const label = document.createElement(tagName);
-    label.setAttribute("for", fd.id);
-    label.className = "field-label";
+    label.setAttribute('for', fd.id);
+    label.className = 'field-label';
     if (fd.label.richText === true) {
       label.innerHTML = stripTags(fd.label.value);
     } else {
       label.textContent = fd.label.value;
     }
     if (fd.label.visible === false) {
-      label.dataset.visible = "false";
+      label.dataset.visible = 'false';
     }
     if (fd.tooltip) {
-      label.title = stripTags(fd.tooltip, "");
+      label.title = stripTags(fd.tooltip, '');
     }
     return label;
   }
@@ -85,12 +85,12 @@ export function createLabel(fd, tagName = "label") {
 }
 
 export function getHTMLRenderType(fd) {
-  return fd?.fieldType?.replace("-input", "") ?? "text";
+  return fd?.fieldType?.replace('-input', '') ?? 'text';
 }
 
-export function createFieldWrapper(fd, tagName = "div", labelFn = createLabel) {
+export function createFieldWrapper(fd, tagName = 'div', labelFn = createLabel) {
   const fieldWrapper = document.createElement(tagName);
-  const nameStyle = fd.name ? ` field-${toClassName(fd.name)}` : "";
+  const nameStyle = fd.name ? ` field-${toClassName(fd.name)}` : '';
   const renderType = getHTMLRenderType(fd);
   const fieldId = `${renderType}-wrapper${nameStyle}`;
   fieldWrapper.className = fieldId;
@@ -98,8 +98,8 @@ export function createFieldWrapper(fd, tagName = "div", labelFn = createLabel) {
   if (fd.visible === false) {
     fieldWrapper.dataset.visible = fd.visible;
   }
-  fieldWrapper.classList.add("field-wrapper");
-  if (fd.label && fd.label.value && typeof labelFn === "function") {
+  fieldWrapper.classList.add('field-wrapper');
+  if (fd.label && fd.label.value && typeof labelFn === 'function') {
     const label = labelFn(fd);
     if (label) {
       fieldWrapper.append(label);
@@ -113,18 +113,18 @@ export function createButton(fd) {
   if (fd.buttonType) {
     wrapper.classList.add(`${fd?.buttonType}-wrapper`);
   }
-  const button = document.createElement("button");
-  button.textContent = fd?.label?.visible === false ? "" : fd?.label?.value;
-  button.type = fd.buttonType || "button";
-  button.classList.add("button");
+  const button = document.createElement('button');
+  button.textContent = fd?.label?.visible === false ? '' : fd?.label?.value;
+  button.type = fd.buttonType || 'button';
+  button.classList.add('button');
   button.id = fd.id;
   button.name = fd.name;
   if (fd?.label?.visible === false) {
-    button.setAttribute("aria-label", fd?.label?.value || "");
+    button.setAttribute('aria-label', fd?.label?.value || '');
   }
   if (fd.enabled === false) {
     button.disabled = true;
-    button.setAttribute("disabled", "");
+    button.setAttribute('disabled', '');
   }
   wrapper.replaceChildren(button);
   return wrapper;
@@ -143,10 +143,10 @@ export function createButton(fd) {
 // }
 
 function getFieldContainer(fieldElement) {
-  const wrapper = fieldElement?.closest(".field-wrapper");
+  const wrapper = fieldElement?.closest('.field-wrapper');
   let container = wrapper;
   if (
-    (fieldElement.type === "radio" || fieldElement.type === "checkbox") &&
+    (fieldElement.type === 'radio' || fieldElement.type === 'checkbox') &&
     wrapper.dataset.fieldset
   ) {
     container = fieldElement?.closest(
@@ -157,9 +157,9 @@ function getFieldContainer(fieldElement) {
 }
 
 export function createHelpText(fd) {
-  const div = document.createElement("div");
-  div.className = "field-description";
-  div.setAttribute("aria-live", "polite");
+  const div = document.createElement('div');
+  div.className = 'field-description';
+  div.setAttribute('aria-live', 'polite');
   div.innerHTML = fd.description;
   div.id = `${fd.id}-description`;
   return div;
@@ -167,16 +167,16 @@ export function createHelpText(fd) {
 
 export function updateOrCreateInvalidMsg(fieldElement, msg) {
   const container = getFieldContainer(fieldElement);
-  let element = container.querySelector(":scope > .field-description");
+  let element = container.querySelector(':scope > .field-description');
   if (!element) {
     element = createHelpText({ id: fieldElement.id });
     container.append(element);
   }
   if (msg) {
-    container.classList.add("field-invalid");
+    container.classList.add('field-invalid');
     element.textContent = msg;
   } else if (container.dataset.description) {
-    container.classList.remove("field-invalid");
+    container.classList.remove('field-invalid');
     element.innerHTML = container.dataset.description;
   } else if (element) {
     element.remove();
@@ -185,16 +185,16 @@ export function updateOrCreateInvalidMsg(fieldElement, msg) {
 }
 
 function removeInvalidMsg(fieldElement) {
-  return updateOrCreateInvalidMsg(fieldElement, "");
+  return updateOrCreateInvalidMsg(fieldElement, '');
 }
 
 export const validityKeyMsgMap = {
-  patternMismatch: { key: "pattern", attribute: "type" },
-  rangeOverflow: { key: "maximum", attribute: "max" },
-  rangeUnderflow: { key: "minimum", attribute: "min" },
-  tooLong: { key: "maxLength", attribute: "maxlength" },
-  tooShort: { key: "minLength", attribute: "minlength" },
-  valueMissing: { key: "required" },
+  patternMismatch: { key: 'pattern', attribute: 'type' },
+  rangeOverflow: { key: 'maximum', attribute: 'max' },
+  rangeUnderflow: { key: 'minimum', attribute: 'min' },
+  tooLong: { key: 'maxLength', attribute: 'maxlength' },
+  tooShort: { key: 'minLength', attribute: 'minlength' },
+  valueMissing: { key: 'required' },
 };
 
 export function getCheckboxGroupValue(name, htmlForm) {
@@ -213,9 +213,9 @@ function updateRequiredCheckboxGroup(name, htmlForm) {
   const value = getCheckboxGroupValue(name, htmlForm);
   checkboxGroup.forEach((checkbox) => {
     if (checkbox.checked || !value.length) {
-      checkbox.setAttribute("required", true);
+      checkbox.setAttribute('required', true);
     } else {
-      checkbox.removeAttribute("required");
+      checkbox.removeAttribute('required');
     }
   });
 }
@@ -237,13 +237,13 @@ function getValidationMessage(fieldElement, wrapper) {
 }
 
 export function checkValidation(fieldElement) {
-  const wrapper = fieldElement.closest(".field-wrapper");
-  const isCheckboxGroup = fieldElement.dataset.fieldType === "checkbox-group";
+  const wrapper = fieldElement.closest('.field-wrapper');
+  const isCheckboxGroup = fieldElement.dataset.fieldType === 'checkbox-group';
   const required = wrapper?.dataset?.required;
-  if (isCheckboxGroup && required === "true") {
+  if (isCheckboxGroup && required === 'true') {
     updateRequiredCheckboxGroup(fieldElement.name, fieldElement.form);
   }
-  if (fieldElement.validity.valid && fieldElement.type !== "file") {
+  if (fieldElement.validity.valid && fieldElement.type !== 'file') {
     removeInvalidMsg(fieldElement);
     return;
   }
@@ -253,12 +253,12 @@ export function checkValidation(fieldElement) {
 }
 
 export function getSitePageName(path) {
-  if (path == null) return "";
-  const index = path.lastIndexOf("/jcr:content");
+  if (path == null) return '';
+  const index = path.lastIndexOf('/jcr:content');
   if (index === -1) {
-    return "";
+    return '';
   }
   const mpath = path.substring(0, index);
-  const pathArray = mpath.split("/");
-  return pathArray[pathArray.length - 1].replaceAll("-", "_");
+  const pathArray = mpath.split('/');
+  return pathArray[pathArray.length - 1].replaceAll('-', '_');
 }

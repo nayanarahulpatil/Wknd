@@ -1,16 +1,16 @@
 /* eslint-disable no-param-reassign */
 
-import { getId } from "./util.js";
+import { getId } from './util.js';
 
 function handleCheckboxAndRadio(field) {
   // if fieldType is checkbox and value is not empty then convert it to enum.
-  if (field?.fieldType === "checkbox" || field?.fieldType === "radio") {
+  if (field?.fieldType === 'checkbox' || field?.fieldType === 'radio') {
     if (field.value) {
       field.enum = [field.value];
-    } else if (field?.fieldType === "checkbox") {
-      field.enum = ["on"]; // default html value
+    } else if (field?.fieldType === 'checkbox') {
+      field.enum = ['on']; // default html value
     }
-    if (field.checked?.toLowerCase() !== "true") {
+    if (field.checked?.toLowerCase() !== 'true') {
       delete field.value;
     }
   }
@@ -18,8 +18,8 @@ function handleCheckboxAndRadio(field) {
 
 function extractRules(field) {
   const rulesMapping = {
-    value: "Value Expression",
-    visible: "Visible Expression",
+    value: 'Value Expression',
+    visible: 'Visible Expression',
   };
   const entries = Object.entries(rulesMapping)
     // eslint-disable-next-line no-unused-vars
@@ -34,10 +34,10 @@ function extractRules(field) {
 function initFormDef(name) {
   return {
     name,
-    adaptiveform: "0.10.0",
+    adaptiveform: '0.10.0',
     metadata: {
-      grammar: "json-formula-1.0.0",
-      version: "1.0.0",
+      grammar: 'json-formula-1.0.0',
+      version: '1.0.0',
     },
     properties: {},
     items: [],
@@ -45,11 +45,11 @@ function initFormDef(name) {
 }
 
 function handleSpecialButtons(field) {
-  if (field?.fieldType === "submit" || field?.fieldType === "reset") {
+  if (field?.fieldType === 'submit' || field?.fieldType === 'reset') {
     field.buttonType = field.fieldType;
-    field.fieldType = "button";
+    field.fieldType = 'button';
     field.properties = field.properties || {};
-    field.properties["fd:buttonType"] = field.buttonType;
+    field.properties['fd:buttonType'] = field.buttonType;
   }
 }
 
@@ -61,9 +61,9 @@ function setProperty(field, key, value) {
 
 function transformFlatToHierarchy(item) {
   Object.keys(item).forEach((key) => {
-    if (key.includes(".")) {
+    if (key.includes('.')) {
       let temp = item;
-      const keys = key.split(".");
+      const keys = key.split('.');
       keys.forEach((k, i, values) => {
         if (i === values.length - 1) {
           temp[k] = item[key];
@@ -79,26 +79,26 @@ function transformFlatToHierarchy(item) {
 
 function handleMultiValues(item, key) {
   let values;
-  if (item && item[key] && typeof item[key] === "string") {
-    values = item[key]?.split(",").map((value) => value.trim());
+  if (item && item[key] && typeof item[key] === 'string') {
+    values = item[key]?.split(',').map((value) => value.trim());
     item[key] = values;
   }
 }
 
 const booleanProperty = [
-  "required",
-  "visible",
-  "enabled",
-  "readOnly",
-  "repeatable",
+  'required',
+  'visible',
+  'enabled',
+  'readOnly',
+  'repeatable',
 ];
 
 function convertStringToBoolean(value) {
-  if (typeof value === "boolean") {
+  if (typeof value === 'boolean') {
     return value;
   }
   const trimmedValue = value?.trim();
-  return trimmedValue === "true" || trimmedValue === "x";
+  return trimmedValue === 'true' || trimmedValue === 'x';
 }
 
 function handleFranklinSpecialCases(item) {
@@ -108,7 +108,7 @@ function handleFranklinSpecialCases(item) {
     }
   });
   // Franklin Mandatory uses x for true.
-  item.required = item.required === "x" || item.required === true;
+  item.required = item.required === 'x' || item.required === true;
 
   if (
     item.Max ||
@@ -117,33 +117,33 @@ function handleFranklinSpecialCases(item) {
     item?.constraintMessages?.min
   ) {
     if (
-      item.fieldType === "number-input" ||
-      item.fieldType === "date" ||
-      item.fieldType === "range"
+      item.fieldType === 'number-input' ||
+      item.fieldType === 'date' ||
+      item.fieldType === 'range'
     ) {
       item.maximum = item.Max;
       item.minimum = item.Min;
       setProperty(
         item.constraintMessages,
-        "maximum",
+        'maximum',
         item?.constraintMessages?.max
       );
       setProperty(
         item.constraintMessages,
-        "minimum",
+        'minimum',
         item?.constraintMessages?.min
       );
-    } else if (item.fieldType === "panel") {
+    } else if (item.fieldType === 'panel') {
       item.maxOccur = item.Max;
       item.minOccur = item.Min;
       setProperty(
         item.constraintMessages,
-        "maxOccur",
+        'maxOccur',
         item?.constraintMessages?.max
       );
       setProperty(
         item.constraintMessages,
-        "minOccur",
+        'minOccur',
         item?.constraintMessages?.min
       );
     } else {
@@ -151,12 +151,12 @@ function handleFranklinSpecialCases(item) {
       item.minLength = item.Min;
       setProperty(
         item.constraintMessages,
-        "maxLength",
+        'maxLength',
         item?.constraintMessages?.max
       );
       setProperty(
         item.constraintMessages,
-        "minLength",
+        'minLength',
         item?.constraintMessages?.min
       );
     }
@@ -166,7 +166,7 @@ function handleFranklinSpecialCases(item) {
     delete item?.constraintMessages?.min;
   }
 
-  if (item.fieldType === "plain-text" && !item.value) {
+  if (item.fieldType === 'plain-text' && !item.value) {
     item.value = item?.label?.value;
     item.label = null;
   }
@@ -175,7 +175,7 @@ function handleFranklinSpecialCases(item) {
 function initField() {
   return {
     constraintMessages: {
-      required: "Please fill in this field.",
+      required: 'Please fill in this field.',
     },
   };
 }
@@ -186,45 +186,45 @@ export default class DocBasedFormToAF {
   errors = [];
 
   fieldPropertyMapping = {
-    Default: "default",
-    Step: "step",
-    Pattern: "pattern",
-    Value: "value",
-    Placeholder: "placeholder",
-    Field: "name",
-    Name: "name",
-    ReadOnly: "readOnly",
-    Description: "description",
-    Type: "fieldType",
-    Label: "label.value",
-    Mandatory: "required",
-    Accept: "accept",
-    Options: "enum",
-    OptionNames: "enumNames",
-    Visible: "visible",
-    Repeatable: "repeatable",
-    Style: "appliedCssClassNames",
-    "Required Error Message": "constraintMessages.required",
-    "Pattern Error Message": "constraintMessages.pattern",
-    "Min Error Message": "constraintMessages.min",
-    "Max Error Message": "constraintMessages.max",
+    Default: 'default',
+    Step: 'step',
+    Pattern: 'pattern',
+    Value: 'value',
+    Placeholder: 'placeholder',
+    Field: 'name',
+    Name: 'name',
+    ReadOnly: 'readOnly',
+    Description: 'description',
+    Type: 'fieldType',
+    Label: 'label.value',
+    Mandatory: 'required',
+    Accept: 'accept',
+    Options: 'enum',
+    OptionNames: 'enumNames',
+    Visible: 'visible',
+    Repeatable: 'repeatable',
+    Style: 'appliedCssClassNames',
+    'Required Error Message': 'constraintMessages.required',
+    'Pattern Error Message': 'constraintMessages.pattern',
+    'Min Error Message': 'constraintMessages.min',
+    'Max Error Message': 'constraintMessages.max',
   };
 
   fieldMapping = new Map([
-    ["text", "text-input"],
-    ["number", "number-input"],
-    ["datetime-local", "date-input"],
-    ["file", "file-input"],
-    ["select", "drop-down"],
-    ["radio-group", "radio-group"],
-    ["checkbox-group", "checkbox-group"],
-    ["plain-text", "plain-text"],
-    ["plaintext", "plain-text"],
-    ["checkbox", "checkbox"],
-    ["textarea", "multiline-input"],
-    ["text-area", "multiline-input"],
-    ["fieldset", "panel"],
-    ["button", "button"],
+    ['text', 'text-input'],
+    ['number', 'number-input'],
+    ['datetime-local', 'date-input'],
+    ['file', 'file-input'],
+    ['select', 'drop-down'],
+    ['radio-group', 'radio-group'],
+    ['checkbox-group', 'checkbox-group'],
+    ['plain-text', 'plain-text'],
+    ['plaintext', 'plain-text'],
+    ['checkbox', 'checkbox'],
+    ['textarea', 'multiline-input'],
+    ['text-area', 'multiline-input'],
+    ['fieldset', 'panel'],
+    ['button', 'button'],
   ]);
 
   /**
@@ -233,18 +233,18 @@ export default class DocBasedFormToAF {
    *
    * @return {{formDef: any, excelData: any}} response
    */
-  transform(exData, { name } = { name: "Form" }) {
+  transform(exData, { name } = { name: 'Form' }) {
     this.errors = [];
     // if its adaptive form json just return it.
     if (exData?.adaptiveform) {
       return { formDef: exData, excelData: null };
     }
     if (!exData || !exData.data) {
-      throw new Error("Unable to retrieve the form details from json");
+      throw new Error('Unable to retrieve the form details from json');
     }
     const formDef = initFormDef(name);
 
-    this.panelMap.set("root", formDef);
+    this.panelMap.set('root', formDef);
     const fieldIdMap = {};
     const rules = [];
     exData.data.forEach(
@@ -252,23 +252,23 @@ export default class DocBasedFormToAF {
         if (item.Type) {
           // eslint-disable-next-line no-unused-vars
           const source = Object.fromEntries(
-            Object.entries(item).filter(([_, v]) => v != null && v !== "")
+            Object.entries(item).filter(([_, v]) => v != null && v !== '')
           );
           let field = { ...source, ...initField() };
           field.id = field.Id || getId(field.Name);
-          field.value = field.Value || "";
+          field.value = field.Value || '';
           this.#transformFieldNames(field);
 
-          if (field?.fieldType === "submit") {
+          if (field?.fieldType === 'submit') {
             const submitValue = field.value;
-            if (submitValue.startsWith("https")) {
+            if (submitValue.startsWith('https')) {
               formDef.redirectUrl = submitValue;
             } else if (submitValue) {
               formDef.thankYouMsg = submitValue;
             }
           }
 
-          if (field?.fieldType === "fieldset") {
+          if (field?.fieldType === 'fieldset') {
             this.panelMap.set(field?.name, field);
             delete field?.constraintMessages;
           }
@@ -295,8 +295,8 @@ export default class DocBasedFormToAF {
     this.#transformFieldType(field);
     transformFlatToHierarchy(field);
     handleCheckboxAndRadio(field);
-    handleMultiValues(field, "enum");
-    handleMultiValues(field, "enumNames");
+    handleMultiValues(field, 'enum');
+    handleMultiValues(field, 'enumNames');
     handleFranklinSpecialCases(field);
     handleSpecialButtons(field);
     return field;
@@ -330,9 +330,9 @@ export default class DocBasedFormToAF {
    * @param {Object} field
    */
   #addToParent(field) {
-    const parent = field?.Fieldset || "root";
+    const parent = field?.Fieldset || 'root';
     const parentField = this.panelMap.get(
-      this.panelMap.has(parent) ? parent : "root"
+      this.panelMap.has(parent) ? parent : 'root'
     );
     parentField.items = parentField.items || [];
     parentField.items.push(field);

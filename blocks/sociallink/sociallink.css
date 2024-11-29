@@ -1,17 +1,17 @@
 .sociallink > ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 .sociallink > ul > li {
-    border: none;
-    background-color: var(--textColorlight);
-    padding: 2px 20px;
+  border: none;
+  background-color: var(--textColorlight);
+  padding: 2px 20px;
 }
 .sociallink .sociallink-card a {
-    background-color: #202020;
-    color: #ebebeb;
+  background-color: #202020;
+  color: #ebebeb;
 }
