@@ -164,7 +164,6 @@ export default async function decorate(block) {
     navSections
       .querySelectorAll(':scope .default-content-wrapper > ul > li')
       .forEach((navSection) => {
-        // console.log(navSection.innerHTML,window.location.origin)
         navSection.addEventListener('click', () => {
           window.open(
             `${window.location.origin}/${navSection.innerHTML
@@ -196,12 +195,11 @@ export default async function decorate(block) {
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
+  
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
-
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
-
   const navWrapper1 = document.createElement('div');
   navWrapper1.className = 'nav-wrapper-black';
   const signintext = document.createElement('a');
@@ -220,9 +218,6 @@ export default async function decorate(block) {
   signintext.title = 'SIGN IN';
   signintext.classList.add('signin-text');
   navWrapper1.append(signintext);
-
-  // navWrapper.append(navWrapper1)
   navWrapper.append(...[navWrapper1, nav]);
-  // navWrapper.append(nav);
   block.append(navWrapper);
 }

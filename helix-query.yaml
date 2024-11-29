@@ -1,0 +1,20 @@
+indices:
+  mysite:
+    include:
+      - '/magazine/**'
+    exclude:
+      - ''
+    target: /query-index
+    properties:
+      author:
+        selectAll: '#all-articles > h5'
+        value: |
+          textContent(el)
+        details:
+          selectAll: '#all-articles > p'
+          value: |
+          textContent(el)
+        img:
+          selectAll: '#all-articles > img'
+          value: |
+           attribute(el, "src")
