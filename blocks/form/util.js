@@ -37,6 +37,7 @@ export function toClassName(name) {
     : '';
 }
 
+/* eslint-disable */
 export const getId = (
   function getId() {
     let ids = {};
