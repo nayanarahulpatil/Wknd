@@ -343,7 +343,7 @@ main .section.separator {
     margin: auto;
 }
 
-.section > .default-content-wrapper > h2:after {
+.section > .default-content-wrapper > h2::after {
     border-bottom: 2px solid #ffea00;
     content: "";
     display: block;
@@ -355,6 +355,7 @@ main .section.separator {
 main {
     margin-top: 0;
 }
+
 @media (width >= 900px) {
     main {
         margin-top: 100px;
