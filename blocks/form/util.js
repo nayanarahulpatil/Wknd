@@ -3,7 +3,7 @@ import { defaultErrorMessages } from './constant.js';
 
 const headings = Array.from({ length: 5 }, (_, i) => `<h${i + 1}>`).join('');
 const allowedTags = `${headings}<a><b><p><i><em><strong><ul><li><ol>`;
-const clear = Symbol('clear'); 
+// const clear = Symbol('clear');
 
 export function stripTags(input, allowd = allowedTags) {
   if (typeof input !== 'string') {
@@ -17,7 +17,7 @@ export function stripTags(input, allowd = allowedTags) {
   const nbsp = /&nbsp;/g; // nbsp: non-breaking space character
   return input
     .replace(comments, '')
-    .replace(tags, ($0, $1) => allowed.indexOf(`<${$1.toLowerCase()}>`) > -1 ? $0 : '')
+    .replace(tags, ($0, $1) => (allowed.indexOf(`<${$1.toLowerCase()}>`) > -1 ? $0 : ''))
     .replace(nbsp, '')
     .trim();
 }
@@ -40,7 +40,7 @@ export function toClassName(name) {
 export const getId = (function getId() {
   let ids = {};
   return (name) => {
-    if (name === clear) {
+    if (name === Symbol('clear')) {
       ids = {};
       return '';
     }
@@ -57,7 +57,7 @@ export const getId = (function getId() {
  * @returns {void}
  */
 export function resetIds() {
-  getId(clear);
+  getId(Symbol('clear'));
 }
 
 export function createLabel(fd, tagName = 'label') {
