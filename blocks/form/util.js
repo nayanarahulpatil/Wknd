@@ -37,7 +37,7 @@ export function toClassName(name) {
     : '';
 }
 
-export const getId = (function getId() {
+export const getId = (function () {
   let ids = {};
   return (name) => {
     if (name === Symbol('clear')) {

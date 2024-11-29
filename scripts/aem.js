@@ -130,7 +130,7 @@ function sampleRUM(checkpoint, data) {
       new CustomEvent('rum', { detail: { checkpoint, data } }),
     );
   } catch (error) {
-    console.error(error);
+    // do nothing
   }
 }
 
