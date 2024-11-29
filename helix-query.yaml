@@ -7,6 +7,14 @@ indices:
     target: /query-index
     properties:
       author:
-        selectFirst: h2
+        selectAll: '.cards > h5'
         value: |
           textContent(el)
+        details:
+          selectAll: '.cards > p'
+          value: |
+          textContent(el)
+        img:
+          selectAll: '.cards > img'
+          value: |
+           attribute(el, "src")
