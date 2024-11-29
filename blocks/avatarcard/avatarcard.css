@@ -1,4 +1,4 @@
-.section .avatarcard-wrapper{
+.section .avatarcard-wrapper {
     margin-top: 30px;
 }
 .avatarcard > ul {
@@ -9,14 +9,14 @@
     grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
     grid-gap: 24px;
     text-align: center;
-  }
-  
-  .avatarcard  > ul > li {
+}
+
+.avatarcard > ul > li {
     border: none;
     background-color: var(--background-color);
-  }
-  
-  .avatarcard  .avatarcard-card-body p{
+}
+
+.avatarcard .avatarcard-card-body p {
     color: dimgray;
     display: block;
     font-size: var(--fontSizeSmall, 14px);
@@ -26,27 +26,26 @@
     text-transform: uppercase;
     white-space: nowrap;
     width: 255px;
-  }
-  
-  .avatarcard  .avatarcard-card-image {
+}
+
+.avatarcard .avatarcard-card-image {
     line-height: 0;
-  }
-  .avatarcard  > ul > li img{
+}
+.avatarcard > ul > li img {
     border-radius: 50%;
     height: 164px;
     -o-object-fit: cover;
     object-fit: cover;
     width: 164px;
-  }
-  .avatarcard-card-body > h3, .avatarcard-card-body > h5 {
-color: #202020;
-font-family: unset;
-font-size: 24px;
-font-weight: 500;
-  }
-  .avatarcard-card-body > h5 {
+}
+.avatarcard-card-body > h3,
+.avatarcard-card-body > h5 {
+    color: #202020;
+    font-family: unset;
+    font-size: 24px;
+    font-weight: 500;
+}
+.avatarcard-card-body > h5 {
     font-size: 14px;
     text-transform: uppercase;
-  }
-
-  
+}

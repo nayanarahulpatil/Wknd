@@ -1,7 +1,17 @@
-import { loadCSS } from '../../scripts/aem.js';
+import { loadCSS } from "../../scripts/aem.js";
 
 let customComponents = [];
-const OOTBComponentDecorators = ['file-input', 'wizard', 'modal', 'tnc', 'toggleable-link', 'rating', 'datetime', 'list', 'location'];
+const OOTBComponentDecorators = [
+  "file-input",
+  "wizard",
+  "modal",
+  "tnc",
+  "toggleable-link",
+  "rating",
+  "datetime",
+  "list",
+  "location",
+];
 
 export function setCustomComponents(components) {
   customComponents = components;
@@ -21,11 +31,13 @@ export function getCustomComponents() {
  */
 async function loadComponent(componentName, element, fd, container) {
   const status = element.dataset.componentStatus;
-  if (status !== 'loading' && status !== 'loaded') {
-    element.dataset.componentStatus = 'loading';
+  if (status !== "loading" && status !== "loaded") {
+    element.dataset.componentStatus = "loading";
     const { blockName } = element.dataset;
     try {
-      loadCSS(`${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`);
+      loadCSS(
+        `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`
+      );
       const decorationComplete = new Promise((resolve) => {
         (async () => {
           try {
@@ -47,7 +59,7 @@ async function loadComponent(componentName, element, fd, container) {
       // eslint-disable-next-line no-console
       console.log(`failed to load component ${blockName}`, error);
     }
-    element.dataset.componentStatus = 'loaded';
+    element.dataset.componentStatus = "loaded";
   }
   return element;
 }
@@ -57,16 +69,19 @@ async function loadComponent(componentName, element, fd, container) {
  *
  * */
 export default async function componentDecorator(element, fd, container) {
-  const { ':type': type = '', fieldType } = fd;
-  if (fieldType === 'file-input') {
-    await loadComponent('file', element, fd, container);
+  const { ":type": type = "", fieldType } = fd;
+  if (fieldType === "file-input") {
+    await loadComponent("file", element, fd, container);
   }
 
-  if (type.endsWith('wizard')) {
-    await loadComponent('wizard', element, fd, container);
+  if (type.endsWith("wizard")) {
+    await loadComponent("wizard", element, fd, container);
   }
 
-  if (getCustomComponents().includes(type) || getOOTBComponents().includes(type)) {
+  if (
+    getCustomComponents().includes(type) ||
+    getOOTBComponents().includes(type)
+  ) {
     await loadComponent(type, element, fd, container);
   }
 

@@ -1,63 +1,60 @@
 .columns > div {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
-.columns-wrapper{
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
+.columns-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
 }
-.columns .block{
-  display: flex;
-      justify-content: center;
-      align-items: stretch;
-      height: 100%;
+.columns .block {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 100%;
 }
 .columns img {
-  width: 100%;
+    width: 100%;
 }
 
 .columns > div > div {
-  order: 1;
+    order: 1;
 }
 
 .columns > div > .columns-img-col {
-  order: 0;
-  flex: 2;
-  width: 100%;
+    order: 0;
+    flex: 2;
+    width: 100%;
 }
-.columns > div > .columns-img-col picture{
-  height: 100%;
-  width: 100%;
+.columns > div > .columns-img-col picture {
+    height: 100%;
+    width: 100%;
 }
-
 
 .columns > div > .columns-img-col img {
-  display: block;
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
+    display: block;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
-.columns-img-col + div{
-  padding: 4.5em 2.5em 2em;
-  background-color: var(--primery-color)
-}
- 
-.columns-wrapper .button-container{
-  margin-bottom: 10px;
+.columns-img-col + div {
+    padding: 4.5em 2.5em 2em;
+    background-color: var(--primery-color);
 }
 
+.columns-wrapper .button-container {
+    margin-bottom: 10px;
+}
 
 @media (width >= 900px) {
-  .columns > div {
-    /* align-items: center; */
-    flex-direction: unset;
-    /* gap: 24px; */
-  }
+    .columns > div {
+        /* align-items: center; */
+        flex-direction: unset;
+        /* gap: 24px; */
+    }
 
-  .columns > div > div {
-    flex: 1;
-    order: unset;
-  }
+    .columns > div > div {
+        flex: 1;
+        order: unset;
+    }
 }
-
