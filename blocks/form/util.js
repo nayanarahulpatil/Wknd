@@ -37,7 +37,7 @@ export function toClassName(name) {
     : '';
 }
 
-export const getId = ((
+export const getId = (
   function getId() {
     let ids = {};
     return (name) => {
@@ -51,7 +51,7 @@ export const getId = ((
       ids[slug] += 1;
       return `${slug}${idSuffix}`;
     };
-  })());
+  })();
 
 /**
  * Resets the ids for the getId function
