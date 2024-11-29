@@ -16,9 +16,7 @@ export function stripTags(input, allowd = allowedTags) {
   const nbsp = /&nbsp;/g; // nbsp: non-breaking space character
   return input
     .replace(comments, '')
-    .replace(tags, ($0, $1) =>
-      allowed.indexOf(`<${$1.toLowerCase()}>`) > -1 ? $0 : ''
-    )
+    .replace(tags, ($0, $1) => allowed.indexOf(`<${$1.toLowerCase()}>`) > -1 ? $0 : '',)
     .replace(nbsp, '')
     .trim();
 }
@@ -31,10 +29,10 @@ export function stripTags(input, allowd = allowedTags) {
 export function toClassName(name) {
   return typeof name === 'string'
     ? name
-        .toLowerCase()
-        .replace(/[^0-9a-z]/gi, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '')
+    .toLowerCase()
+    .replace(/[^0-9a-z]/gi, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
     : '';
 }
 
@@ -146,11 +144,11 @@ function getFieldContainer(fieldElement) {
   const wrapper = fieldElement?.closest('.field-wrapper');
   let container = wrapper;
   if (
-    (fieldElement.type === 'radio' || fieldElement.type === 'checkbox') &&
-    wrapper.dataset.fieldset
+    (fieldElement.type === 'radio' || fieldElement.type === 'checkbox')
+    && wrapper.dataset.fieldset
   ) {
     container = fieldElement?.closest(
-      `fieldset[name=${wrapper.dataset.fieldset}]`
+      `fieldset[name=${wrapper.dataset.fieldset}]`,
     );
   }
   return container;
@@ -208,8 +206,7 @@ export function getCheckboxGroupValue(name, htmlForm) {
 }
 
 function updateRequiredCheckboxGroup(name, htmlForm) {
-  const checkboxGroup =
-    htmlForm.querySelectorAll(`input[name="${name}"]`) || [];
+  const checkboxGroup = htmlForm.querySelectorAll(`input[name="${name}"]`) || [];
   const value = getCheckboxGroupValue(name, htmlForm);
   checkboxGroup.forEach((checkbox) => {
     if (checkbox.checked || !value.length) {
@@ -222,17 +219,16 @@ function updateRequiredCheckboxGroup(name, htmlForm) {
 
 function getValidationMessage(fieldElement, wrapper) {
   const [invalidProperty] = Object.keys(validityKeyMsgMap).filter(
-    (state) => fieldElement.validity[state]
+    (state) => fieldElement.validity[state],
   );
   const { key, attribute } = validityKeyMsgMap[invalidProperty] || {};
-  const message =
-    wrapper.dataset[`${key}ErrorMessage`] ||
-    (attribute
-      ? defaultErrorMessages[key].replace(
-          /\$0/,
-          fieldElement.getAttribute(attribute)
-        )
-      : defaultErrorMessages[key]);
+  const message = wrapper.dataset[`${key}ErrorMessage`]
+    || (attribute
+    ? defaultErrorMessages[key].replace(
+    /\$0/,
+    fieldElement.getAttribute(attribute),
+    )
+    : defaultErrorMessages[key]);
   return message || fieldElement.validationMessage;
 }
 

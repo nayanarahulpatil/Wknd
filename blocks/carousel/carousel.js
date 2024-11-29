@@ -1,7 +1,7 @@
-import { fetchPlaceholders } from '../../scripts/aem.js';
+// import { fetchPlaceholders } from '../../scripts/aem.js';
 
-const placeholders = await fetchPlaceholders();
-const { clickhere } = placeholders;
+// const placeholders = await fetchPlaceholders();
+// const { clickhere } = placeholders;
 function updateActiveSlide(slide) {
   const block = slide.closest('.carousel');
   const slideIndex = parseInt(slide.dataset.slideIndex, 10);
@@ -70,7 +70,7 @@ function bindEvents(block) {
         if (entry.isIntersecting) updateActiveSlide(entry.target);
       });
     },
-    { threshold: 0.5 }
+    { threshold: 0.5 },
   );
   block.querySelectorAll('.carousel-slide').forEach((slide) => {
     slideObserver.observe(slide);
@@ -92,7 +92,7 @@ function createSlide(row, slideIndex, carouselId) {
 
   row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
     column.classList.add(
-      `carousel-slide-${colIdx === 0 ? 'image' : 'content'}`
+      `carousel-slide-${colIdx === 0 ? 'image' : 'content'}`,
     );
     slide.append(column);
   });
@@ -117,7 +117,7 @@ export default async function decorate(block) {
   block.setAttribute('role', 'region');
   block.setAttribute(
     'aria-roledescription',
-    placeholders.carousel || 'Carousel'
+    placeholders.carousel || 'Carousel',
   );
 
   const container = document.createElement('div');
@@ -132,7 +132,7 @@ export default async function decorate(block) {
     const slideIndicatorsNav = document.createElement('nav');
     slideIndicatorsNav.setAttribute(
       'aria-label',
-      placeholders.carouselSlideControls || 'Carousel Slide Controls'
+      placeholders.carouselSlideControls || 'Carousel Slide Controls',
     );
     slideIndicators = document.createElement('ol');
     slideIndicators.classList.add('carousel-slide-indicators');
@@ -143,11 +143,11 @@ export default async function decorate(block) {
     slideNavButtons.classList.add('carousel-navigation-buttons');
     slideNavButtons.innerHTML = `
       <button type="button" class= "slide-prev" aria-label="${
-        placeholders.previousSlide || 'Previous Slide'
-      }"></button>
+    placeholders.previousSlide || 'Previous Slide'
+}"></button>
       <button type="button" class="slide-next" aria-label="${
-        placeholders.nextSlide || 'Next Slide'
-      }"></button>
+    placeholders.nextSlide || 'Next Slide'
+}"></button>
     `;
 
     container.append(slideNavButtons);

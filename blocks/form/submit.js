@@ -12,7 +12,7 @@ export function submitSuccess(e, form) {
     window.location.assign(encodeURI(redirectUrl));
   } else {
     let thankYouMessage = form.parentNode.querySelector(
-      '.form-message.success-message'
+      '.form-message.success-message',
     );
     if (!thankYouMessage) {
       thankYouMessage = document.createElement('div');

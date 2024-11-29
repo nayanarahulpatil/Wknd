@@ -209,7 +209,7 @@ export default async function decorate(block) {
     if (origin && origin.href && origin.href.includes('/modal')) {
       e.preventDefault();
       const { openModal } = await import(
-        `${window.hlx.codeBasePath}/blocks/modal/modal.js`,
+        `${window.hlx.codeBasePath}/blocks/modal/modal.js`
       );
       openModal(origin.href);
     }

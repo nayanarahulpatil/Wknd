@@ -13,8 +13,7 @@
 /* eslint-env browser */
 function sampleRUM(checkpoint, data) {
   // eslint-disable-next-line max-len
-  const timeShift = () =>
-    window.performance
+  const timeShift = () => window.performance
       ? window.performance.now()
       : Date.now() - window.hlx.rum.firstReadTime;
   try {
@@ -22,8 +21,7 @@ function sampleRUM(checkpoint, data) {
     sampleRUM.enhance = () => {};
     if (!window.hlx.rum) {
       const param = new URLSearchParams(window.location.search).get('rum');
-      const weight =
-        (window.SAMPLE_PAGEVIEWS_AT_RATE === 'high' && 10)
+      const weight = (window.SAMPLE_PAGEVIEWS_AT_RATE === 'high' && 10)
         || (window.SAMPLE_PAGEVIEWS_AT_RATE === 'low' && 1000)
         || (param === 'on' && 1)
         || 100;
@@ -75,11 +73,9 @@ function sampleRUM(checkpoint, data) {
           sampleRUM('error', errData);
         });
 
-        sampleRUM.baseURL =
-          sampleRUM.baseURL ||
-          new URL(window.RUM_BASE || '/', new URL('https://rum.hlx.page'));
-        sampleRUM.collectBaseURL =
-          sampleRUM.collectBaseURL || sampleRUM.baseURL;
+        sampleRUM.baseURL = sampleRUM.baseURL 
+        || new URL(window.RUM_BASE || '/', new URL('https://rum.hlx.page'));
+        sampleRUM.collectBaseURL = sampleRUM.collectBaseURL || sampleRUM.baseURL;
         sampleRUM.sendPing = (ck, time, pingData = {}) => {
           // eslint-disable-next-line max-len, object-curly-newline
           const rumData = JSON.stringify({
@@ -95,10 +91,9 @@ function sampleRUM(checkpoint, data) {
             : '';
           const { href: url, origin } = new URL(
             `.rum/${weight}${urlParams}`,
-            sampleRUM.collectBaseURL
+            sampleRUM.collectBaseURL,
           );
-          const body =
-            origin === window.location.origin
+          const body = origin === window.location.origin
               ? new Blob([rumData], { type: 'application/json' })
               : rumData;
           navigator.sendBeacon(url, body);
@@ -121,7 +116,7 @@ function sampleRUM(checkpoint, data) {
             `.rum/@adobe/helix-rum-enhancer@${
               enhancerVersion || '^2'
             }/src/index.js`,
-            sampleRUM.baseURL
+            sampleRUM.baseURL,
           ).href;
           document.head.appendChild(script);
         };
@@ -134,7 +129,7 @@ function sampleRUM(checkpoint, data) {
       window.hlx.rum.collector(checkpoint, data, timeShift());
     }
     document.dispatchEvent(
-      new CustomEvent('rum', { detail: { checkpoint, data } })
+      new CustomEvent('rum', { detail: { checkpoint, data } }),
     );
   } catch (error) {
     // something went awry
@@ -149,14 +144,13 @@ function setup() {
   window.hlx.RUM_MASK_URL = 'full';
   window.hlx.RUM_MANUAL_ENHANCE = true;
   window.hlx.codeBasePath = '';
-  window.hlx.lighthouse =
-    new URLSearchParams(window.location.search).get('lighthouse') === 'on';
+  window.hlx.lighthouse = new URLSearchParams(window.location.search).get('lighthouse') === 'on';
 
   const scriptEl = document.querySelector('script[src$="/scripts/scripts.js"]');
   if (scriptEl) {
     try {
       [window.hlx.codeBasePath] = new URL(scriptEl.src).pathname.split(
-        '/scripts/scripts.js'
+        '/scripts/scripts.js',
       );
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -188,7 +182,6 @@ function toClassName(name) {
         .replace(/^-|-$/g, '')
     : '';
 }
-
 /**
  * Sanitizes a string for use as a js property name.
  * @param {string} name The unsanitized string
@@ -197,7 +190,6 @@ function toClassName(name) {
 function toCamelCase(name) {
   return toClassName(name).replace(/-([a-z])/g, (g) => g[1].toUpperCase());
 }
-
 /**
  * Extracts the config from a block.
  * @param {Element} block The block element
@@ -241,7 +233,6 @@ function readBlockConfig(block) {
   });
   return config;
 }
-
 /**
  * Loads a CSS file.
  * @param {string} href URL to the CSS file
@@ -260,7 +251,6 @@ async function loadCSS(href) {
     }
   });
 }
-
 /**
  * Loads a non module JS file.
  * @param {string} src URL to the JS file
@@ -285,7 +275,6 @@ async function loadScript(src, attrs) {
     }
   });
 }
-
 /**
  * Retrieves the content of metadata tags.
  * @param {string} name The metadata name (or property)
@@ -299,7 +288,6 @@ function getMetadata(name, doc = document) {
     .join(', ');
   return meta || '';
 }
-
 /**
  * Returns a picture element with webp and fallbacks
  * @param {string} src The image URL
@@ -315,7 +303,7 @@ function createOptimizedPicture(
   breakpoints = [
     { media: '(min-width: 600px)', width: '2000' },
     { width: '750' },
-  ]
+  ],
 ) {
   const url = new URL(src, window.location.href);
   const picture = document.createElement('picture');
@@ -329,7 +317,7 @@ function createOptimizedPicture(
     source.setAttribute('type', 'image/webp');
     source.setAttribute(
       'srcset',
-      `${pathname}?width=${br.width}&format=webply&optimize=medium`
+      `${pathname}?width=${br.width}&format=webply&optimize=medium`,
     );
     picture.appendChild(source);
   });
@@ -341,7 +329,7 @@ function createOptimizedPicture(
       if (br.media) source.setAttribute('media', br.media);
       source.setAttribute(
         'srcset',
-        `${pathname}?width=${br.width}&format=${ext}&optimize=medium`
+        `${pathname}?width=${br.width}&format=${ext}&optimize=medium`,
       );
       picture.appendChild(source);
     } else {
@@ -351,7 +339,7 @@ function createOptimizedPicture(
       picture.appendChild(img);
       img.setAttribute(
         'src',
-        `${pathname}?width=${br.width}&format=${ext}&optimize=medium`
+        `${pathname}?width=${br.width}&format=${ext}&optimize=medium`,
       );
     }
   });
@@ -402,16 +390,15 @@ function wrapTextNodes(block) {
 
   block.querySelectorAll(':scope > div > div').forEach((blockColumn) => {
     if (blockColumn.hasChildNodes()) {
-      const hasWrapper =
-        !!blockColumn.firstElementChild &&
-        validWrappers.some(
-          (tagName) => blockColumn.firstElementChild.tagName === tagName
+      const hasWrapper = !!blockColumn.firstElementChild
+      && validWrappers.some(
+          (tagName) => blockColumn.firstElementChild.tagName === tagName,
         );
       if (!hasWrapper) {
         wrap(blockColumn);
       } else if (
-        blockColumn.firstElementChild.tagName === 'PICTURE' &&
-        (blockColumn.children.length > 1 || !!blockColumn.textContent.trim())
+        blockColumn.firstElementChild.tagName === 'PICTURE'
+        && (blockColumn.children.length > 1 || !!blockColumn.textContent.trim())
       ) {
         wrap(blockColumn);
       }
@@ -431,26 +418,26 @@ function decorateButtons(element) {
       const twoup = a.parentElement.parentElement;
       if (!a.querySelector('img')) {
         if (
-          up.childNodes.length === 1 &&
-          (up.tagName === 'P' || up.tagName === 'DIV')
+          up.childNodes.length === 1
+          && (up.tagName === 'P' || up.tagName === 'DIV')
         ) {
           a.className = 'button'; // default
           up.classList.add('button-container');
         }
         if (
-          up.childNodes.length === 1 &&
-          up.tagName === 'STRONG' &&
-          twoup.childNodes.length === 1 &&
-          twoup.tagName === 'P'
+          up.childNodes.length === 1
+          && up.tagName === 'STRONG'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
         ) {
           a.className = 'button primary';
           twoup.classList.add('button-container');
         }
         if (
-          up.childNodes.length === 1 &&
-          up.tagName === 'EM' &&
-          twoup.childNodes.length === 1 &&
-          twoup.tagName === 'P'
+          up.childNodes.length === 1
+          && up.tagName === 'EM'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
         ) {
           a.className = 'button secondary';
           twoup.classList.add('button-container');
@@ -611,7 +598,7 @@ async function loadBlock(block) {
     const { blockName } = block.dataset;
     try {
       const cssLoaded = loadCSS(
-        `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`
+        `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`,
       );
       const decorationComplete = new Promise((resolve) => {
         (async () => {

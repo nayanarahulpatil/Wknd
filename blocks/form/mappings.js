@@ -36,7 +36,8 @@ async function loadComponent(componentName, element, fd, container) {
     const { blockName } = element.dataset;
     try {
       loadCSS(
-        `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`);
+        `${window.hlx.codeBasePath}/blocks/form/components/${componentName}/${componentName}.css`,
+      );
       const decorationComplete = new Promise((resolve) => {
         (async () => {
           try {

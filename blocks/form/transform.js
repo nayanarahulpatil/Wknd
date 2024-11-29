@@ -126,12 +126,12 @@ function handleFranklinSpecialCases(item) {
       setProperty(
         item.constraintMessages,
         'maximum',
-        item?.constraintMessages?.max
+        item?.constraintMessages?.max,
       );
       setProperty(
         item.constraintMessages,
         'minimum',
-        item?.constraintMessages?.min
+        item?.constraintMessages?.min,
       );
     } else if (item.fieldType === 'panel') {
       item.maxOccur = item.Max;
@@ -139,12 +139,12 @@ function handleFranklinSpecialCases(item) {
       setProperty(
         item.constraintMessages,
         'maxOccur',
-        item?.constraintMessages?.max
+        item?.constraintMessages?.max,
       );
       setProperty(
         item.constraintMessages,
         'minOccur',
-        item?.constraintMessages?.min
+        item?.constraintMessages?.min,
       );
     } else {
       item.maxLength = item.Max;
@@ -152,12 +152,12 @@ function handleFranklinSpecialCases(item) {
       setProperty(
         item.constraintMessages,
         'maxLength',
-        item?.constraintMessages?.max
+        item?.constraintMessages?.max,
       );
       setProperty(
         item.constraintMessages,
         'minLength',
-        item?.constraintMessages?.min
+        item?.constraintMessages?.min,
       );
     }
     delete item.Max;
@@ -252,7 +252,8 @@ export default class DocBasedFormToAF {
         if (item.Type) {
           // eslint-disable-next-line no-unused-vars
           const source = Object.fromEntries(
-            Object.entries(item).filter(([v]) => v != null && v !== ''));
+            Object.entries(item).filter(([v]) => v != null && v !== ''),
+          );
           let field = { ...source, ...initField() };
           field.id = field.Id || getId(field.Name);
           field.value = field.Value || '';
@@ -279,7 +280,7 @@ export default class DocBasedFormToAF {
             rules.push([field.id, currentRules]);
           }
         }
-      }
+      },
     );
     formDef.properties.rules = { fieldIdMap, rules };
     return formDef;
@@ -331,7 +332,7 @@ export default class DocBasedFormToAF {
   #addToParent(field) {
     const parent = field?.Fieldset || 'root';
     const parentField = this.panelMap.get(
-      this.panelMap.has(parent) ? parent : 'root'
+      this.panelMap.has(parent) ? parent : 'root',
     );
     parentField.items = parentField.items || [];
     parentField.items.push(field);

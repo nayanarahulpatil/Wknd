@@ -38,13 +38,12 @@ function constructPayload(form) {
 export function submitSuccess(e, form) {
   const { payload } = e;
   const redirectUrl = form.dataset.redirectUrl || payload?.body?.redirectUrl;
-  const thankYouMsg =
-    form.dataset.thankYouMsg || payload?.body?.thankYouMessage;
+  const thankYouMsg = form.dataset.thankYouMsg || payload?.body?.thankYouMessage;
   if (redirectUrl) {
     window.location.assign(encodeURI(redirectUrl));
   } else {
     let thankYouMessage = form.parentNode.querySelector(
-      '.form-message.success-message'
+      '.form-message.success-message',
     );
     if (!thankYouMessage) {
       thankYouMessage = document.createElement('div');
@@ -85,7 +84,7 @@ async function submitForm(form) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ data: payload }),
-      }
+      },
     );
     if (response.ok) {
       submitSuccess(response, form);
