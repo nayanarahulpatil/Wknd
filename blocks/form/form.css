@@ -23,7 +23,7 @@ main .form {
   background-color: var(--form-background-color);
 }
 
-main .form>div:not(:first-child) {
+main .form > div:not(:first-child) {
   display: none;
 }
 
@@ -141,8 +141,8 @@ main .form form .radio-wrapper {
   gap: 8px;
 }
 
-main .form form fieldset>.radio-wrapper:first-of-type,
-main .form form fieldset>.checkbox-wrapper:first-of-type {
+main .form form fieldset > .radio-wrapper:first-of-type,
+main .form form fieldset > .checkbox-wrapper:first-of-type {
   margin: var(--form-field-gap);
 }
 
@@ -168,7 +168,7 @@ main .form button {
   width: 100%;
 }
 
-main form .file-wrapper>button {
+main form .file-wrapper > button {
   display: flex;
 }
 
@@ -285,20 +285,20 @@ main .form form .wizard {
   padding: 20px var(--form-wizard-padding);
 }
 
-main .form form .wizard>legend {
+main .form form .wizard > legend {
   float: left;
   width: 100%;
 }
 
-main .form form .wizard>.field-description {
+main .form form .wizard > .field-description {
   width: 100%;
 }
 
-main .form form .wizard>fieldset>legend {
+main .form form .wizard > fieldset > legend {
   display: none;
 }
 
-main .form form .wizard>fieldset:not(.current-wizard-step) {
+main .form form .wizard > fieldset:not(.current-wizard-step) {
   display: none;
 }
 
@@ -392,7 +392,6 @@ main .form form .wizard.left .panel-wrapper {
 }
 
 @media (width >=1200px) {
-
   main .form form .checkbox-wrapper,
   main .form form .form-textarea-wrapper,
   main .form form .file-wrapper,
@@ -493,8 +492,18 @@ main .form .form-image-wrapper img {
   height: auto;
 }
 
-main form .wizard>.current-wizard-step.panel-wrapper:first-of-type~.wizard-button-wrapper>.wizard-button-prev,
-main form .wizard>.current-wizard-step.panel-wrapper:last-of-type~.wizard-button-wrapper>.wizard-button-next {
+main
+  form
+  .wizard
+  > .current-wizard-step.panel-wrapper:first-of-type
+  ~ .wizard-button-wrapper
+  > .wizard-button-prev,
+main
+  form
+  .wizard
+  > .current-wizard-step.panel-wrapper:last-of-type
+  ~ .wizard-button-wrapper
+  > .wizard-button-next {
   display: none;
 }
 
