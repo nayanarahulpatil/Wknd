@@ -220,6 +220,10 @@ header nav .nav-sections ul>li {
   font-weight: 400;
 }
 
+header nav .nav-sections ul>li>ul>li {
+  font-weight: 400;
+}
+
 header nav .nav-sections ul>li:hover {
   background-color: var(--btn-background-color);
   cursor: pointer;
@@ -227,10 +231,6 @@ header nav .nav-sections ul>li:hover {
 
 header nav .nav-sections ul>li>ul {
   margin-top: 0;
-}
-
-header nav .nav-sections ul>li>ul>li {
-  font-weight: 400;
 }
 
 @media (width >=900px) {
@@ -354,8 +354,6 @@ header nav .nav-tools:focus {
 
 header nav .nav-tools .default-content-wrapper {
   display: flex;
-  /* flex-direction: row-reverse; */
-  /* justify-content: space-around; */
   align-items: center;
 }
 

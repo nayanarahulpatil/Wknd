@@ -176,18 +176,23 @@ h6 {
 h1 {
     font-size: var(--heading-font-size-xxl);
 }
+
 h2 {
     font-size: var(--heading-font-size-xl);
 }
+
 h3 {
     font-size: var(--heading-font-size-l);
 }
+
 h4 {
     font-size: var(--heading-font-size-m);
 }
+
 h5 {
     font-size: var(--heading-font-size-s);
 }
+
 h6 {
     font-size: var(--heading-font-size-xs);
 }
@@ -328,6 +333,7 @@ main .section.highlight {
     margin: 0;
     padding: 40px 0;
 }
+
 main .section.separator {
     display: block;
     border-style: solid;
@@ -336,6 +342,7 @@ main .section.separator {
     max-width: 1135px;
     margin: auto;
 }
+
 .section > .default-content-wrapper > h2:after {
     border-bottom: 2px solid #ffea00;
     content: "";
@@ -344,6 +351,7 @@ main .section.separator {
     width: 84px;
     margin-bottom: 15px;
 }
+
 main {
     margin-top: 0;
 }
