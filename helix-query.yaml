@@ -7,6 +7,6 @@ indices:
     target: /query-index
     properties:
       author:
-        select: main > div:nth-of-type(2) > p
+        select: main > div:nth-of-type(2) p
         value: |
-          match(el, 'by (.*)')
+          match(e1, 'by (.*)')
