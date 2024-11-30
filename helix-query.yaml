@@ -6,7 +6,7 @@ indices:
       - ''
     target: /query-index
     properties:
-      author:
-        select: main > div:nth-of-type(2) p
+      author1:
+        selectFirst: h2
         value: |
-          match(e1, 'by (.*)')
+          textContent(el)
