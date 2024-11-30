@@ -6,7 +6,7 @@ indices:
       - ''
     target: /query-index
     properties:
-      author1:
-        selectFirst: h2
-        value: |
+      author:
+        select: main > div:nth-of-type(2) p
+        values: |
           textContent(el)
