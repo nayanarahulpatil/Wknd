@@ -10,7 +10,7 @@ indices:
         select: main > div:nth-of-type(2) p
         values: |
           textContent(el)
-        details:
-         select: main > div:nth-of-type(2) h4
-         values: |
+      details:
+        select: main > div:nth-of-type(2) h4
+        values: |
           textContent(el)
