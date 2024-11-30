@@ -15,5 +15,5 @@ indices:
         values: |
           textContent(el)
       profile:
-        select: main >div:nth-of-type(3) picture source
+        select: main >div:nth-of-type(3) picture
         value: innerHTML(el)
