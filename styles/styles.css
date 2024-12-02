@@ -352,6 +352,17 @@ main .section.separator {
     margin-bottom: 15px;
 }
 
+.section > .default-content-wrapper > #about-us,
+.section > .default-content-wrapper > #magazine {
+    font-size: var(--heading-font-size-xxl);
+}
+
+.section > .default-content-wrapper > #about-us::after,
+.section > .default-content-wrapper > #magazine::after {
+    border-bottom: 0;
+    display: none;
+}
+
 main {
     margin-top: 0;
 }

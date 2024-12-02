@@ -47,6 +47,7 @@ async function loadFonts() {
   }
 }
 
+// eslint-disable-next-line import/prefer-default-export
 function autolinkModals(element) {
   element.addEventListener('click', async (e) => {
     const origin = e.target.closest('a');
@@ -116,7 +117,6 @@ async function loadEager(doc) {
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
-  autolinkModals(doc);
   const main = doc.querySelector('main');
   await loadSections(main);
 
