@@ -66,7 +66,8 @@ function autolinkModals(element) {
  */
 function buildAutoBlocks(main) {
   try {
-    buildHeroBlock(main);
+    // eslint-disable-next-line no-console
+    // buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
