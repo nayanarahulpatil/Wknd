@@ -5,7 +5,7 @@ async function processData(data) {
   const details = JSON.parse(data.details);
   const images = data.profile
     .split('./')
-    .filter(Boolean)
+    .filter(Boolean);
   const result = articleNames.map((name, index) => ({
     articleNames: name,
     profile: images[index] || null,
