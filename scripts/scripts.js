@@ -48,18 +48,18 @@ async function loadFonts() {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-function autolinkModals(element) {
-  element.addEventListener('click', async (e) => {
-    const origin = e.target.closest('a');
-    if (origin && origin.href && origin.href.includes('/modal')) {
-      e.preventDefault();
-      const { openModal } = await import(
-        `${window.hlx.codeBasePath}/blocks/modal/modal.js`
-      );
-      openModal(origin.href);
-    }
-  });
-}
+// function autolinkModals(element) {
+//   element.addEventListener('click', async (e) => {
+//     const origin = e.target.closest('a');
+//     if (origin && origin.href && origin.href.includes('/modal')) {
+//       e.preventDefault();
+//       const { openModal } = await import(
+//         `${window.hlx.codeBasePath}/blocks/modal/modal.js`
+//       );
+//       openModal(origin.href);
+//     }
+//   });
+// }
 
 /**
  * Builds all synthetic blocks in a container element.
