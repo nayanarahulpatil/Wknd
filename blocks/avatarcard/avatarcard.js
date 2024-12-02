@@ -12,22 +12,22 @@ export default function decorate(block) {
         div.className = 'avatarcard-card-image';
       } else {
         div.className = 'avatarcard-card-body';
-      (async () => {
-        try {
-          const navPath = '/sociallink';
-          const fragment = await loadFragment(navPath);
-          if (fragment) {
-            const fragmentSection = fragment.querySelector('.sociallink-container');
-            if (fragmentSection) {
-              li.append(fragmentSection);
+        (async () => {
+          try {
+            const navPath = '/sociallink';
+            const fragment = await loadFragment(navPath);
+            if (fragment) {
+              const fragmentSection = fragment.querySelector('.sociallink-container');
+              if (fragmentSection) {
+                li.append(fragmentSection);
+              }
+            }
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(`failed to load component for`, error);
           }
-          }
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.log(`failed to load component for`, error);
-        }
-      })();
-  }
+        })();
+      }
     });
     ul.append(li);
   });
