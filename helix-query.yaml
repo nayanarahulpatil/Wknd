@@ -16,4 +16,4 @@ indices:
           textContent(el)
       profile:
         select: main >div:nth-of-type(3) picture
-        value: innerHTML(el)
+        value: words(el, src=", =medium")
