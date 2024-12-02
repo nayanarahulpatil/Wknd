@@ -24,7 +24,7 @@ export default function decorate(block) {
             }
           } catch (error) {
             // eslint-disable-next-line no-console
-            console.log(`failed to load component for`, error);
+            console.log('failed to load component for', error);
           }
         })();
       }
