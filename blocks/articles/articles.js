@@ -6,7 +6,6 @@ async function processData(data) {
   const images = data.profile
     .split('./')
     .filter(Boolean)
-    .map((img) => './' + img);
   const result = articleNames.map((name, index) => ({
     articleNames: name,
     profile: images[index] || null,
@@ -41,8 +40,7 @@ async function createcardHolder(containerDiv, data) {
       .closest('picture')
       .replaceWith(
         createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
-          ),
-      );
+      ));
     containerDiv.append(ul);
   }
 }
