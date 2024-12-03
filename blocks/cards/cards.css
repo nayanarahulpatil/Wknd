@@ -12,6 +12,24 @@
   background-color: var(--background-color);
 }
 
+.cards.members > ul > li {
+  display: flex;
+  flex-direction: column-reverse;
+  opacity: 0.5;
+  border: none;
+  background-color: var(--background-color);
+}
+
+.cards.members .cards-card-body a {
+  background-color: #c8c4c4;
+  color: dimgray;
+  font-size: 14px;
+  padding: .5em 1em;
+  text-transform: uppercase;
+  margin: 0 0 5px 0;
+  cursor:default;
+}
+
 /* .cards .cards-card-body {
   margin: 16px;
 } */
