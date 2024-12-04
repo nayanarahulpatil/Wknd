@@ -12,6 +12,24 @@
   background-color: var(--background-color);
 }
 
+.cards-wrapper .cards.members ul li .cards-card-body::before {
+  background: linear-gradient(to top left, hsl(0deg 0% 100% / 0%) 0, hsl(0deg 0% 100% / 0%) 50%, var(--brandPrimary, #ffea00) 50%, var(--brandPrimary, #ffea00) 100%);
+  color: #000;
+  content: "🔒";
+  font-family: wknd-icon-font !important;
+  font-size: 1.25rem;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 1;
+  padding: 9pt;
+  position: relative;
+  text-transform: none;
+  top: 49px;
+  z-index: 2;
+}
+
 .cards.members > ul > li {
   display: flex;
   flex-direction: column-reverse;

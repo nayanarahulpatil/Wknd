@@ -47,7 +47,6 @@ header nav {
   align-items: center;
   gap: 0 24px;
   margin: auto;
-  max-width: 1190px;
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--body-font-family);
@@ -68,8 +67,15 @@ header nav[aria-expanded='true'] {
     display: flex;
     justify-content: space-between;
     gap: 0 25px;
-    max-width: 1190px;
     padding: 50px 40px;
+  }
+
+  header nav.scroll {
+    display: flex;
+    justify-content: space-between;
+    gap: 0 25px;
+    box-shadow: 0 8px 20px 0 rgb(0 0 0 / 26%);
+    padding: 10px 40px;
   }
 
   header nav[aria-expanded='true'] {
