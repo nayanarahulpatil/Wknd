@@ -13,7 +13,7 @@
 }
 
 .cards-wrapper .cards.members ul li .cards-card-body::before {
-  background: linear-gradient(to top left, hsl(0deg 0% 100% / 0%) 0, hsl(0deg 0% 100% / 0%) 50%, var(--brandPrimary, #ffea00) 50%, var(--brandPrimary, #ffea00) 100%);
+  background: linear-gradient(to top left, hsl(0deg 0% 100% / 0%) 0, hsl(0deg 0% 100% / 0%) 50%, #ffea00 50%,  #ffea00 100%);
   color: #000;
   content: "🔒";
   font-family: wknd-icon-font !important;
