@@ -132,14 +132,14 @@ export default async function decorate(block) {
   const nav = document.createElement('nav');
   nav.id = 'nav';
 
-  window.addEventListener('scroll',function(){
-    const navselect = document.querySelector('nav')
-    if(window.scrollY > 100){
+  window.addEventListener('scroll', function () {
+    const navselect = document.querySelector('nav');
+    if (window.scrollY > 100) {
       navselect.classList.add('scroll');
-    }else{
-      navselect.classList.remove('scroll')
+    } else {
+      navselect.classList.remove('scroll');
     }
-  })
+  });
 
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
